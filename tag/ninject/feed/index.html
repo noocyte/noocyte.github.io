@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Home of noocyte &#187; ninject</title>
+	<atom:link href="http://blog.noocyte.net/tag/ninject/feed/" rel="self" type="application/rss+xml" />
+	<link>http://blog.noocyte.net</link>
+	<description>Ramblings of a mad mind</description>
+	<lastBuildDate>Fri, 04 Apr 2014 13:39:58 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>Ninject and Factory Injection</title>
+		<link>http://blog.noocyte.net/2014/03/31/ninject-and-factory-injection/</link>
+		<comments>http://blog.noocyte.net/2014/03/31/ninject-and-factory-injection/#comments</comments>
+		<pubDate>Mon, 31 Mar 2014 07:17:55 +0000</pubDate>
+		<dc:creator><![CDATA[noocyte]]></dc:creator>
+				<category><![CDATA[Geek]]></category>
+		<category><![CDATA[uxrisk]]></category>
+		<category><![CDATA[ninject]]></category>
+		<category><![CDATA[open source]]></category>
+
+		<guid isPermaLink="false">http://blog.noocyte.net/?p=1602</guid>
+		<description><![CDATA[We have a requirement to instantiate a service facade based on a single parameter, this parameter will then be used to load configuration settings appropriately. A fellow team member reminded me that this looked like a factory requirement so I started to look at Ninject Factory. At first I didn&#8217;t quite get the examples, but &#8230; <a href="http://blog.noocyte.net/2014/03/31/ninject-and-factory-injection/" class="more-link">Continue reading <span class="screen-reader-text">Ninject and Factory Injection</span> <span class="meta-nav">&#8594;</span></a>]]></description>
+				<content:encoded><![CDATA[<p>We have a requirement to instantiate a service facade based on a single parameter, this parameter will then be used to load configuration settings appropriately. A fellow team member reminded me that this looked like a factory requirement so I started to look at <a href="https://github.com/ninject/ninject.extensions.factory">Ninject Factory</a>. At first I didn&#8217;t quite get the examples, but decided to just try it out and see what would work. Turns out to be pretty simple! This post is mostly as a reminder to myself and perhaps a bit of guidance for others looking at doing the same.</p>
+<p>There are three requirements for using Ninject Factory:</p>
+<ol>
+<li>Install the <a href="https://www.nuget.org/packages/Ninject.Extensions.Factory/">nuget package</a></li>
+<li>Create a factory interface</li>
+<li>Create a binding to the interface</li>
+</ol>
+<p>Point number two looked like this for me:</p>
+<script src="https://gist.github.com/9886738.js"></script>
+<p>The IServiceFacade interface and concrete implementation looks like this:</p>
+<script src="https://gist.github.com/9886776.js"></script>
+<p>Tying it all together is the Ninject Module:</p>
+<script src="https://gist.github.com/9886799.js"></script>
+<p>Line number 5 will make Ninject create a proxy that calls the constructor on ServiceFacade, with the prefix input and the IService implementation (bound on line 7). To make use of the factory I did this:</p>
+<script src="https://gist.github.com/9886878.js"></script>
+<p>Here I inject the factory interface and call the create method (line 23). The magic happens inside that create method, since this is a proxy generated for me by Ninject! The really cool thing is that all regular bindings still apply, so if you look at the constructor for ServiceFacade it takes the prefix string and an interface (IService) that I bind in my module. Stepping into (F11) the create method in debug mode I end up in the constructor for ServiceFacade, perhaps as expected, but very cool!</p>
+<p>Also worth mentioning; you could have more inputs to the create method and only the names matter, ordering does not. So if I needed both prefix and postfix I would have them in any order between the factory interface and the constructor, as long as names match it&#8217;s OK. And finally you are not restricted to one method on the factory interface, so I could have had a CreateWithPrefix and a CreateWithPostfix method etc.</p>
+<p>The complete source for this is not available, as it&#8217;s part of a much bigger project known as <a href="http://uxrisk.com">UXRisk</a> and it is not open source.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://blog.noocyte.net/2014/03/31/ninject-and-factory-injection/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+	</channel>
+</rss>

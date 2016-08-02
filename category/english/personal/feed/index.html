@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Home of noocyte &#187; Personal</title>
+	<atom:link href="http://blog.noocyte.net/category/english/personal/feed/" rel="self" type="application/rss+xml" />
+	<link>http://blog.noocyte.net</link>
+	<description>Ramblings of a mad mind</description>
+	<lastBuildDate>Fri, 04 Apr 2014 13:39:58 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>My blog just died and was brought back from the dead!</title>
+		<link>http://blog.noocyte.net/2013/01/22/my-blog-just-died-and-was-brought-back-from-the-dead/</link>
+		<comments>http://blog.noocyte.net/2013/01/22/my-blog-just-died-and-was-brought-back-from-the-dead/#comments</comments>
+		<pubDate>Tue, 22 Jan 2013 13:58:05 +0000</pubDate>
+		<dc:creator><![CDATA[noocyte]]></dc:creator>
+				<category><![CDATA[Personal]]></category>
+		<category><![CDATA[azure]]></category>
+		<category><![CDATA[cleardb]]></category>
+		<category><![CDATA[mysql]]></category>
+		<category><![CDATA[wordpress]]></category>
+
+		<guid isPermaLink="false">http://blog.noocyte.net/?p=1222</guid>
+		<description><![CDATA[The other day I noticed that I got an error message when trying to read my blog. Basically it said that the database connection was not behaving and WordPress was unable to load my blog. Auch I thought and started to wonder what could be wrong. The thing is, I run this blog on Microsoft &#8230; <a href="http://blog.noocyte.net/2013/01/22/my-blog-just-died-and-was-brought-back-from-the-dead/" class="more-link">Continue reading <span class="screen-reader-text">My blog just died and was brought back from the dead!</span> <span class="meta-nav">&#8594;</span></a>]]></description>
+				<content:encoded><![CDATA[<p>The other day I noticed that I got an error message when trying to read my blog. Basically it said that the database connection was not behaving and WordPress was unable to load my blog. Auch I thought and started to wonder what could be wrong. The thing is, I run this blog on <a href="http://www.windowsazure.com/en-us/home/scenarios/web-sites/">Microsoft Windows Azure Web Sites</a>, using the WordPress application from their gallery. I have done very little to set it up, apart from the custom domain name. The blog was running on <a href="http://noocyte.azurewebsites.net/">http://noocyte.azurewebsites.net/</a> and I setup a CNAME record to point to <a href="http://blog.noocyte.net/">http://blog.noocyte.net/</a>. All fun and games, until the database broke down… </p>
+<p>Another interesting tidbit; the database is mySQL and is running in Azure, but it’s operated by ClearDB, not Microsoft. And <a href="https://www.cleardb.com/home.view">ClearDB</a> has no integration with the regular Azure control panel. In fact I am still unaware of how to manage my database…</p>
+<p>Anyway I went into the Azure portal and had a look at my blog web site; all peachy! The database is listed as a linked resource and all lights were green. So I googled with Bing and came up with <a href="http://social.msdn.microsoft.com/Forums/en-US/ssdsgetstarted/thread/a2fe0bd6-7e46-4350-af00-158b296d8dfd">one decent answer</a>; the load on the database could be exceeding the allowed load by ClearDB. But how on earth this blog could attain such a load was a mystery to me… So I <a href="http://social.msdn.microsoft.com/Forums/en-US/windowsazurewebsitespreview/thread/a9a02261-85e1-4f87-97dd-cf08e9e58548">posted a question</a> of my own on MSDN Forums and fairly soon a representative from Microsoft came back to me suggesting that I contact ClearDB and making them ‘adjust’ the database connections limit. So I filled out <a href="https://www.cleardb.com/contact.html">their form</a> and waited. In fact I waited 4 days and heard nothing. On Monday I tweeted:</p>
+<p><a href="http://blog.noocyte.net/wp-content/uploads/2013/01/tweet1.png"><img title="tweet1" style="border-top: 0px; border-right: 0px; background-image: none; border-bottom: 0px; padding-top: 0px; padding-left: 0px; margin: 0px 0px 0px 30px; border-left: 0px; display: inline; padding-right: 0px" border="0" alt="tweet1" src="http://blog.noocyte.net/wp-content/uploads/2013/01/tweet1_thumb.png" width="640" height="182"></a></p>
+<p>They came back to me and suggested I fill out their contact form again, which I did. This time they came back within the hour and told me that my database had been “de-provisioned by a call that was made from Windows Azure on Thursday, January 10th at 15:21 UTC”! De-provisioned means deleted in my book; not cool! </p>
+<p>Long story short, they were able to restore the database into a new database and everything was OK. They are now investigating why this de-provisioning call was made, I sure as heck didn’t make it! And the database is still listed as a linked resource in the Azure portal! </p>
+<p>As a side note; since the blog was down anyway and I had to create a new database I finally created my own subscription in Azure, separate from my work subscriptions, to host the blog. Will cost me a bit of money, but feels good to pay for services I use!</p>
+]]></content:encoded>
+			<wfw:commentRss>http://blog.noocyte.net/2013/01/22/my-blog-just-died-and-was-brought-back-from-the-dead/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>New home for my blog</title>
+		<link>http://blog.noocyte.net/2012/08/21/new-home-for-my-blog/</link>
+		<comments>http://blog.noocyte.net/2012/08/21/new-home-for-my-blog/#comments</comments>
+		<pubDate>Tue, 21 Aug 2012 12:32:20 +0000</pubDate>
+		<dc:creator><![CDATA[noocyte]]></dc:creator>
+				<category><![CDATA[Personal]]></category>
+
+		<guid isPermaLink="false">http://blog.noocyte.net/?p=542</guid>
+		<description><![CDATA[Inspired by Scott Hanselman&#8217;s latest blog entry I have decided to get my own domain (noocyte.net) and move the blog here. It&#8217;s currently hosted in Microsoft Azure as a web site. Hopefully I will get back to blogging real soon now (again!).]]></description>
+				<content:encoded><![CDATA[<p>Inspired by Scott Hanselman&#8217;s <a href="http://www.hanselman.com/blog/YourWordsAreWasted.aspx">latest blog</a> entry I have decided to get my own domain (noocyte.net) and move the blog here. It&#8217;s currently hosted in Microsoft Azure as a web site.</p>
+<p>Hopefully I will get back to blogging real soon now (again!).</p>
+]]></content:encoded>
+			<wfw:commentRss>http://blog.noocyte.net/2012/08/21/new-home-for-my-blog/feed/</wfw:commentRss>
+		<slash:comments>2</slash:comments>
+		</item>
+		<item>
+		<title>google reader updated–for the worse</title>
+		<link>http://blog.noocyte.net/2011/11/01/google-reader-updatedfor-the-worse/</link>
+		<comments>http://blog.noocyte.net/2011/11/01/google-reader-updatedfor-the-worse/#comments</comments>
+		<pubDate>Tue, 01 Nov 2011 06:37:00 +0000</pubDate>
+		<dc:creator><![CDATA[noocyte]]></dc:creator>
+				<category><![CDATA[Personal]]></category>
+		<category><![CDATA[google]]></category>
+		<category><![CDATA[google-reader]]></category>
+
+		<guid isPermaLink="false">https://noocyte.wordpress.com/2011/11/01/google-reader-updatedfor-the-worse/</guid>
+		<description><![CDATA[So today I was notified that Google Reader has been updated with a new interface! Brilliant I thought; I love new stuff and the reader was beginning to look a little long in the tooth. But as soon as it loaded I though: dang, that’s not an improvement! It looks alright, but too much screen &#8230; <a href="http://blog.noocyte.net/2011/11/01/google-reader-updatedfor-the-worse/" class="more-link">Continue reading <span class="screen-reader-text">google reader updated–for the worse</span> <span class="meta-nav">&#8594;</span></a>]]></description>
+				<content:encoded><![CDATA[<p>So today I was notified that Google Reader has been updated with a new interface! Brilliant I thought; I love new stuff and the reader was beginning to look a little long in the tooth. But as soon as it loaded I though: dang, that’s not an improvement! It looks alright, but too much screen realestate is lost to navigation or whatever.. Take a look at the pic below:</p>
+<p><a href="http://noocyte.files.wordpress.com/2011/11/google-reader.png"><img style="background-image:none;padding-left:0;padding-right:0;display:inline;padding-top:0;border-width:0;" title="Google Reader" border="0" alt="Google Reader" src="http://noocyte.files.wordpress.com/2011/11/google-reader_thumb.png" width="804" height="314" /></a></p>
+<p>There are a total of 3 rows of navigation/toolbars, that’s just too much for me! The row with the red button on (it says “Abonner”) should be merged with the one above; that would help a lot. As it stands right now I’m not happy with the new interface…</p>
+<p>Update: It’s also dead slow and often does not respond at all… Not happy!</p>
+]]></content:encoded>
+			<wfw:commentRss>http://blog.noocyte.net/2011/11/01/google-reader-updatedfor-the-worse/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Protected: Incredible new utility</title>
+		<link>http://blog.noocyte.net/2009/10/08/incredible-new-utility/</link>
+		<comments>http://blog.noocyte.net/2009/10/08/incredible-new-utility/#comments</comments>
+		<pubDate>Thu, 08 Oct 2009 06:40:00 +0000</pubDate>
+		<dc:creator><![CDATA[noocyte]]></dc:creator>
+				<category><![CDATA[Personal]]></category>
+		<category><![CDATA[virtual machine]]></category>
+		<category><![CDATA[virtualization]]></category>
+
+		<guid isPermaLink="false">http://noocyte.wordpress.com/?p=335</guid>
+		<description><![CDATA[There is no excerpt because this is a protected post.]]></description>
+				<content:encoded><![CDATA[<form action="http://blog.noocyte.net/wp-login.php?action=postpass" class="post-password-form" method="post">
+<p>This content is password protected. To view it please enter your password below:</p>
+<p><label for="pwbox-335">Password: <input name="post_password" id="pwbox-335" type="password" size="20" /></label> <input type="submit" name="Submit" value="Submit" /></p>
+</form>
+]]></content:encoded>
+			<wfw:commentRss>http://blog.noocyte.net/2009/10/08/incredible-new-utility/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Gamerscore Blog : Dead Space &#8211; A Horror Lover&#8217;s First Impressions</title>
+		<link>http://blog.noocyte.net/2008/10/15/gamerscore-blog-dead-space-a-horror-lovers-first-impressions/</link>
+		<comments>http://blog.noocyte.net/2008/10/15/gamerscore-blog-dead-space-a-horror-lovers-first-impressions/#comments</comments>
+		<pubDate>Wed, 15 Oct 2008 06:40:44 +0000</pubDate>
+		<dc:creator><![CDATA[noocyte]]></dc:creator>
+				<category><![CDATA[Link]]></category>
+		<category><![CDATA[Personal]]></category>
+		<category><![CDATA[games]]></category>
+		<category><![CDATA[xbox]]></category>
+
+		<guid isPermaLink="false">http://noocyte.wordpress.com/2008/10/15/gamerscore-blog-dead-space-a-horror-lovers-first-impressions/</guid>
+		<description><![CDATA[I’m not much for shooter (excluding GoW) nor Horrors (excluding 7th Guest), but DirtyDivas short review of Dead Space was funny. It ended with this priceless quote: The onslaught of games has begun. I need better time management skills. This whole work thing and that sleeping thing is not conducive to my gaming time. Gamerscore &#8230; <a href="http://blog.noocyte.net/2008/10/15/gamerscore-blog-dead-space-a-horror-lovers-first-impressions/" class="more-link">Continue reading <span class="screen-reader-text">Gamerscore Blog : Dead Space &#8211; A Horror Lover&#8217;s First Impressions</span> <span class="meta-nav">&#8594;</span></a>]]></description>
+				<content:encoded><![CDATA[<p>I’m not much for shooter (excluding <a href="http://gearsofwar.xbox.com">GoW</a>) nor Horrors (excluding <a href="http://en.wikipedia.org/wiki/The_7th_Guest">7th Guest</a>), but <a href="http://www.360voice.com/tag/DirtyDiva">DirtyDivas</a> short review of Dead Space was funny. It ended with this <a href="http://www.priceless.com/">priceless</a> quote: </p>
+<blockquote><p>The onslaught of games has begun. I need better time management skills. This whole work thing and that sleeping thing is not conducive to my gaming time.</p></blockquote>
+<p><a href="http://gamerscoreblog.com/team/archive/2008/10/14/561870.aspx">Gamerscore Blog : Dead Space &#8211; A Horror Lover&#8217;s First Impressions</a></p>
+]]></content:encoded>
+			<wfw:commentRss>http://blog.noocyte.net/2008/10/15/gamerscore-blog-dead-space-a-horror-lovers-first-impressions/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Linux Hater&#8217;s Blog: Mini-Rant</title>
+		<link>http://blog.noocyte.net/2008/09/30/linux-haters-blog-mini-rant/</link>
+		<comments>http://blog.noocyte.net/2008/09/30/linux-haters-blog-mini-rant/#comments</comments>
+		<pubDate>Tue, 30 Sep 2008 06:33:31 +0000</pubDate>
+		<dc:creator><![CDATA[noocyte]]></dc:creator>
+				<category><![CDATA[Link]]></category>
+		<category><![CDATA[Personal]]></category>
+		<category><![CDATA[hater]]></category>
+		<category><![CDATA[linux]]></category>
+		<category><![CDATA[rant]]></category>
+
+		<guid isPermaLink="false">http://noocyte.wordpress.com/2008/09/30/linux-haters-blog-mini-rant/</guid>
+		<description><![CDATA[A lot of the posts on this blog are a bit over the top, foul language and completely biased opinions, but this quote is hilarious: If you upgrade your version of Windows and an application breaks, it&#8217;s Microsoft&#8217;s fault. If you upgrade your version of OS X and your application breaks, it&#8217;s the ISV&#8217;s fault. &#8230; <a href="http://blog.noocyte.net/2008/09/30/linux-haters-blog-mini-rant/" class="more-link">Continue reading <span class="screen-reader-text">Linux Hater&#8217;s Blog: Mini-Rant</span> <span class="meta-nav">&#8594;</span></a>]]></description>
+				<content:encoded><![CDATA[<p> A lot of the posts on <a href="http://linuxhaters.blogspot.com/">this</a> blog are a bit over the top, foul language and completely biased opinions, but this quote is hilarious:</p>
+<blockquote><p>If you upgrade your version of Windows and an application breaks, it&#8217;s Microsoft&#8217;s fault. If you upgrade your version of OS X and your application breaks, it&#8217;s the ISV&#8217;s fault. If you upgrade your version of Linux and your application breaks, well, that&#8217;s your own damn fault.</p></blockquote>
+<p><a href="http://linuxhaters.blogspot.com/2008/09/mini-rant.html">Linux Hater&#8217;s Blog: Mini-Rant</a></p>
+]]></content:encoded>
+			<wfw:commentRss>http://blog.noocyte.net/2008/09/30/linux-haters-blog-mini-rant/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Microsoft looks to &#8216;Mojave&#8217; to revive Vista&#8217;s image</title>
+		<link>http://blog.noocyte.net/2008/07/25/microsoft-looks-to-mojave-to-revive-vistas-image/</link>
+		<comments>http://blog.noocyte.net/2008/07/25/microsoft-looks-to-mojave-to-revive-vistas-image/#comments</comments>
+		<pubDate>Fri, 25 Jul 2008 13:23:12 +0000</pubDate>
+		<dc:creator><![CDATA[noocyte]]></dc:creator>
+				<category><![CDATA[Link]]></category>
+		<category><![CDATA[Personal]]></category>
+		<category><![CDATA[vista]]></category>
+
+		<guid isPermaLink="false">http://noocyte.wordpress.com/2008/07/25/microsoft-looks-to-mojave-to-revive-vistas-image/</guid>
+		<description><![CDATA[2014-04-04 13:34:26]]></description>
+				<content:encoded><![CDATA[<p><a href="http://community.winsupersite.com/blogs/paul/archive/2008/07/25/microsoft-looks-to-mojave-to-revive-vista-s-image.aspx">Microsoft looks to &#8216;Mojave&#8217; to revive Vista&#8217;s image &#8211; SuperSite Blog</a></p>
+<blockquote><p>While up in Sonoma a few weeks ago, I was finishing off something on my laptop and our friends came into the hotel room. One of them, looking at the laptop said, &#8220;that&#8217;s beautiful. Is that Mac OS X?&#8221; (Qualifier: She is a graphic designer. What can you do?) I said, &#8220;no, that&#8217;s Windows Vista.&#8221; And she replied,&#8221; Wow. It&#8217;s really nice looking. I heard it was awful.&#8221;</p></blockquote>
+<p>I like Vista, I really do. It&#8217;s better than Xp in some ways and as good in others. I&#8217;ve yet to find something that is worse than Xp.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://blog.noocyte.net/2008/07/25/microsoft-looks-to-mojave-to-revive-vistas-image/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>We Want A Dead Simple Web Tablet For $200. Help Us Build It.</title>
+		<link>http://blog.noocyte.net/2008/07/22/we-want-a-dead-simple-web-tablet-for-200-help-us-build-it/</link>
+		<comments>http://blog.noocyte.net/2008/07/22/we-want-a-dead-simple-web-tablet-for-200-help-us-build-it/#comments</comments>
+		<pubDate>Tue, 22 Jul 2008 08:16:44 +0000</pubDate>
+		<dc:creator><![CDATA[noocyte]]></dc:creator>
+				<category><![CDATA[Link]]></category>
+		<category><![CDATA[Personal]]></category>
+		<category><![CDATA[firefox]]></category>
+		<category><![CDATA[linux]]></category>
+		<category><![CDATA[tablet pc]]></category>
+
+		<guid isPermaLink="false">http://noocyte.wordpress.com/2008/07/22/we-want-a-dead-simple-web-tablet-for-200-help-us-build-it/</guid>
+		<description><![CDATA[We Want A Dead Simple Web Tablet For $200. Help Us Build It. I’m tired of waiting &#8211; I want a dead simple and dirt cheap touch screen web tablet to surf the web. Nothing fancy like the Dell latitude XT, which costs $2,500. Just a Macbook Air-thin touch screen machine that runs Firefox and &#8230; <a href="http://blog.noocyte.net/2008/07/22/we-want-a-dead-simple-web-tablet-for-200-help-us-build-it/" class="more-link">Continue reading <span class="screen-reader-text">We Want A Dead Simple Web Tablet For $200. Help Us Build It.</span> <span class="meta-nav">&#8594;</span></a>]]></description>
+				<content:encoded><![CDATA[<p><a href="http://www.techcrunch.com/2008/07/21/we-want-a-dead-simple-web-tablet-help-us-build-it/">We Want A Dead Simple Web Tablet For $200. Help Us Build It.</a><br />
+<blockquote>I’m tired of waiting &#8211; I want a dead simple and dirt cheap touch screen web tablet to surf the web. Nothing fancy like the Dell latitude XT, which costs $2,500. Just a Macbook Air-thin touch screen machine that runs Firefox and possibly Skype on top of a Linux kernel. It doesn’t exist today, and as far as we can tell no one is creating one. So let’s design it, build a few and then open source the specs so anyone can create them. </p></blockquote>
+<p>Yes. That&#8217;s it, bring it to me now. Yes. Do this now! <img src="http://blog.noocyte.net/wp-includes/images/smilies/simple-smile.png" alt=":)" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+]]></content:encoded>
+			<wfw:commentRss>http://blog.noocyte.net/2008/07/22/we-want-a-dead-simple-web-tablet-for-200-help-us-build-it/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Windows Home Server Power Pack 1 &#8211; RTM!</title>
+		<link>http://blog.noocyte.net/2008/07/22/windows-home-server-power-pack-1-rtm/</link>
+		<comments>http://blog.noocyte.net/2008/07/22/windows-home-server-power-pack-1-rtm/#comments</comments>
+		<pubDate>Tue, 22 Jul 2008 06:36:24 +0000</pubDate>
+		<dc:creator><![CDATA[noocyte]]></dc:creator>
+				<category><![CDATA[Link]]></category>
+		<category><![CDATA[Personal]]></category>
+		<category><![CDATA[whs]]></category>
+
+		<guid isPermaLink="false">http://noocyte.wordpress.com/2008/07/22/windows-home-server-power-pack-1-rtm/</guid>
+		<description><![CDATA[Home Server Hacks: Power Pack 1 &#8211; Come and get it! The team is pleased to announce that Windows Home Server Power Pack 1 has been released to manufacturing (RTM) and is now available on the Microsoft Download Center! So, finally the much awaited Power Pack 1 is finally ready to be downloaded! This download &#8230; <a href="http://blog.noocyte.net/2008/07/22/windows-home-server-power-pack-1-rtm/" class="more-link">Continue reading <span class="screen-reader-text">Windows Home Server Power Pack 1 &#8211; RTM!</span> <span class="meta-nav">&#8594;</span></a>]]></description>
+				<content:encoded><![CDATA[<p><a href="http://www.homeserverhacks.com/2008/07/power-pack-1-come-and-get-it.html">Home Server Hacks: Power Pack 1 &#8211; Come and get it!</a><br />
+<blockquote>The team is pleased to announce that Windows Home Server Power Pack 1 has been released to manufacturing (RTM) and is now available on the Microsoft Download Center!</p></blockquote>
+<p>So, finally the much awaited Power Pack 1 is finally ready to be downloaded! This download will fix the data corruption bug that&#8217;s been haunting WHS for 8 or 9 months now and it enables backup of Vista 64bit clients. And a few other bits as well, but those two I believe is the highlights.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://blog.noocyte.net/2008/07/22/windows-home-server-power-pack-1-rtm/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Update processes and &#8220;additional software&#8221;</title>
+		<link>http://blog.noocyte.net/2008/07/21/update-processes-and-additional-software/</link>
+		<comments>http://blog.noocyte.net/2008/07/21/update-processes-and-additional-software/#comments</comments>
+		<pubDate>Mon, 21 Jul 2008 20:37:42 +0000</pubDate>
+		<dc:creator><![CDATA[noocyte]]></dc:creator>
+				<category><![CDATA[Personal]]></category>
+		<category><![CDATA[java]]></category>
+		<category><![CDATA[update]]></category>
+		<category><![CDATA[vista]]></category>
+
+		<guid isPermaLink="false">http://noocyte.wordpress.com/2008/07/21/update-processes-and-additional-software/</guid>
+		<description><![CDATA[So when I turned on my laptop today there was two notifications (actually three; new e-mail); new updates on Windows Update and a new update to Java. The Windows Update process was easy enough, only a few security updates. And the Java update appeared to be simple, but then after clicking &#8220;Next&#8221; once or twice &#8230; <a href="http://blog.noocyte.net/2008/07/21/update-processes-and-additional-software/" class="more-link">Continue reading <span class="screen-reader-text">Update processes and &#8220;additional software&#8221;</span> <span class="meta-nav">&#8594;</span></a>]]></description>
+				<content:encoded><![CDATA[<p>So when I turned on my laptop today there was two notifications (actually three; new e-mail); new updates on Windows Update and a new update to Java. The Windows Update process was easy enough, only a few security updates. And the Java update appeared to be simple, but then after clicking &#8220;Next&#8221; once or twice this screen comes up:</p>
+<p><a href="http://noocyte.files.wordpress.com/2008/07/image.png"><img style="border-width:0;" height="312" alt="image" src="http://noocyte.files.wordpress.com/2008/07/image-thumb.png" width="404" border="0"></a> </p>
+<p>So, what wrong with this screen? Well, what the heck does OpenOffice have to do with an update to Java?! I don&#8217;t have OpenOffice, so there is no reason to update it! In fact the check box is checked by default, so if my mom were doing this she would have gotten OpenOffice installed (I presume) without her understanding why&#8230;</p>
+<p>But alright, I can uncheck the checkbox and proceed to the next screen, where the update begins. This is what greets me:</p>
+<p><a href="http://noocyte.files.wordpress.com/2008/07/image1.png"><img style="border-width:0;" height="306" alt="image" src="http://noocyte.files.wordpress.com/2008/07/image-thumb1.png" width="404" border="0"></a></p>
+<p>Man that&#8217;s ugly! And &#8220;This may take a few minutes&#8221; actually took 4 or 5 minutes&#8230; Compared to my Windows Update that took maybe 2 minutes&#8230;</p>
+<p>Java is looking more and more like Real Player or Quicktime&#8230; I hate it when companies tries to sell you more than you ask for. Stop it, now, please!</p>
+<p>PS: The Java update did not require a reboot, the Windows Update does unfortunately.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://blog.noocyte.net/2008/07/21/update-processes-and-additional-software/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+	</channel>
+</rss>

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Home of noocyte &#187; code</title>
+	<atom:link href="http://blog.noocyte.net/tag/code/feed/" rel="self" type="application/rss+xml" />
+	<link>http://blog.noocyte.net</link>
+	<description>Ramblings of a mad mind</description>
+	<lastBuildDate>Fri, 04 Apr 2014 13:39:58 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>DRY in the real world</title>
+		<link>http://blog.noocyte.net/2009/08/27/dry-in-the-real-world/</link>
+		<comments>http://blog.noocyte.net/2009/08/27/dry-in-the-real-world/#comments</comments>
+		<pubDate>Thu, 27 Aug 2009 08:24:00 +0000</pubDate>
+		<dc:creator><![CDATA[noocyte]]></dc:creator>
+				<category><![CDATA[Geek]]></category>
+		<category><![CDATA[code]]></category>
+		<category><![CDATA[code nazi]]></category>
+		<category><![CDATA[dry]]></category>
+
+		<guid isPermaLink="false">http://noocyte.wordpress.com/2009/08/27/dry-in-the-real-world/</guid>
+		<description><![CDATA[In programming there are many, many principles. One of the more useful ones that I’ve discovered lately is DRY: Don’t Repeat Yourself. It’s simple really, never ever copy code and don’t write the same code twice. In the real world it might not be as easy though… Today I was about to check in some &#8230; <a href="http://blog.noocyte.net/2009/08/27/dry-in-the-real-world/" class="more-link">Continue reading <span class="screen-reader-text">DRY in the real world</span> <span class="meta-nav">&#8594;</span></a>]]></description>
+				<content:encoded><![CDATA[<p>In programming there are many, many principles. One of the more useful ones that I’ve discovered lately is <a href="http://en.wikipedia.org/wiki/Don%27t_repeat_yourself">DRY</a>: <strong>Don’t Repeat Yourself</strong>. It’s simple really, never ever copy code and don’t write the same code twice. In the real world it might not be as easy though… </p>
+<p>Today I was about to check in some code and I went through my regular check-in routine (you have one as well I presume?) and discovered that I was violating DRY! At least if you’re being anal about it… The code in question was a little like this: (slightly altered to protect the innocents)</p>
+<div style="border-bottom:silver 1px solid;text-align:left;border-left:silver 1px solid;line-height:12pt;background-color:#f4f4f4;width:97.5%;font-family:&#39;direction:ltr;max-height:200px;font-size:8pt;overflow:auto;border-top:silver 1px solid;cursor:text;border-right:silver 1px solid;margin:20px 0 10px;padding:4px;" id="codeSnippetWrapper">
+<div style="text-align:left;line-height:12pt;background-color:#f4f4f4;width:100%;font-family:&#39;direction:ltr;color:black;font-size:8pt;overflow:visible;border-style:none;padding:0;" id="codeSnippet">
+<pre style="text-align:left;line-height:12pt;background-color:white;width:100%;font-family:&#39;direction:ltr;color:black;font-size:8pt;overflow:visible;border-style:none;margin:0;padding:0;"><span style="color:#606060;" id="lnum1">   1:</span> <span style="color:#0000ff;">using</span> (SPSite site = <span style="color:#0000ff;">new</span> SPSite(url)) {</pre>
+<p><!--CRLF--></p>
+<pre style="text-align:left;line-height:12pt;background-color:#f4f4f4;width:100%;font-family:&#39;direction:ltr;color:black;font-size:8pt;overflow:visible;border-style:none;margin:0;padding:0;"><span style="color:#606060;" id="lnum2">   2:</span>     <span style="color:#0000ff;">using</span> (SPWeb web = site.OpenWeb()) {</pre>
+<p><!--CRLF--></p>
+<pre style="text-align:left;line-height:12pt;background-color:white;width:100%;font-family:&#39;direction:ltr;color:black;font-size:8pt;overflow:visible;border-style:none;margin:0;padding:0;"><span style="color:#606060;" id="lnum3">   3:</span>         lang = web.Language;</pre>
+<p><!--CRLF--></p>
+<pre style="text-align:left;line-height:12pt;background-color:#f4f4f4;width:100%;font-family:&#39;direction:ltr;color:black;font-size:8pt;overflow:visible;border-style:none;margin:0;padding:0;"><span style="color:#606060;" id="lnum4">   4:</span>     }</pre>
+<p><!--CRLF--></p>
+<pre style="text-align:left;line-height:12pt;background-color:white;width:100%;font-family:&#39;direction:ltr;color:black;font-size:8pt;overflow:visible;border-style:none;margin:0;padding:0;"><span style="color:#606060;" id="lnum5">   5:</span> }</pre>
+<p><!--CRLF--></div>
+</div>
+<p>(I didn’t really return the language, but no need to include all of the source code)</p>
+<p>So I was doing the double using in 4-5 places; a clear violation of DRY in my book. So what I did was this:</p>
+<div style="border-bottom:silver 1px solid;text-align:left;border-left:silver 1px solid;line-height:12pt;background-color:#f4f4f4;width:97.5%;font-family:&#39;direction:ltr;max-height:200px;font-size:8pt;overflow:auto;border-top:silver 1px solid;cursor:text;border-right:silver 1px solid;margin:20px 0 10px;padding:4px;" id="codeSnippetWrapper">
+<div style="text-align:left;line-height:12pt;background-color:#f4f4f4;width:100%;font-family:&#39;direction:ltr;color:black;font-size:8pt;overflow:visible;border-style:none;padding:0;" id="codeSnippet">
+<pre style="text-align:left;line-height:12pt;background-color:white;width:100%;font-family:&#39;direction:ltr;color:black;font-size:8pt;overflow:visible;border-style:none;margin:0;padding:0;"><span style="color:#606060;" id="lnum1">   1:</span> <span style="color:#0000ff;">private</span> T OpenSiteWeb&lt;T&gt;(<span style="color:#0000ff;">string</span> url, Func&lt;SPSite, SPWeb, T&gt; implementingMember) {</pre>
+<p><!--CRLF--></p>
+<pre style="text-align:left;line-height:12pt;background-color:#f4f4f4;width:100%;font-family:&#39;direction:ltr;color:black;font-size:8pt;overflow:visible;border-style:none;margin:0;padding:0;"><span style="color:#606060;" id="lnum2">   2:</span>    <span style="color:#0000ff;">using</span> (SPSite site = <span style="color:#0000ff;">new</span> SPSite(url)) {</pre>
+<p><!--CRLF--></p>
+<pre style="text-align:left;line-height:12pt;background-color:white;width:100%;font-family:&#39;direction:ltr;color:black;font-size:8pt;overflow:visible;border-style:none;margin:0;padding:0;"><span style="color:#606060;" id="lnum3">   3:</span>        <span style="color:#0000ff;">using</span> (SPWeb web = site.OpenWeb()) {</pre>
+<p><!--CRLF--></p>
+<pre style="text-align:left;line-height:12pt;background-color:#f4f4f4;width:100%;font-family:&#39;direction:ltr;color:black;font-size:8pt;overflow:visible;border-style:none;margin:0;padding:0;"><span style="color:#606060;" id="lnum4">   4:</span>            <span style="color:#0000ff;">return</span> implementingMember(site, web);</pre>
+<p><!--CRLF--></p>
+<pre style="text-align:left;line-height:12pt;background-color:white;width:100%;font-family:&#39;direction:ltr;color:black;font-size:8pt;overflow:visible;border-style:none;margin:0;padding:0;"><span style="color:#606060;" id="lnum5">   5:</span>        }</pre>
+<p><!--CRLF--></p>
+<pre style="text-align:left;line-height:12pt;background-color:#f4f4f4;width:100%;font-family:&#39;direction:ltr;color:black;font-size:8pt;overflow:visible;border-style:none;margin:0;padding:0;"><span style="color:#606060;" id="lnum6">   6:</span>    }</pre>
+<p><!--CRLF--></p>
+<pre style="text-align:left;line-height:12pt;background-color:white;width:100%;font-family:&#39;direction:ltr;color:black;font-size:8pt;overflow:visible;border-style:none;margin:0;padding:0;"><span style="color:#606060;" id="lnum7">   7:</span> }</pre>
+<p><!--CRLF--></div>
+</div>
+<p>This method I can use like this:</p>
+<div style="border-bottom:silver 1px solid;text-align:left;border-left:silver 1px solid;line-height:12pt;background-color:#f4f4f4;width:97.5%;font-family:&#39;direction:ltr;max-height:200px;font-size:8pt;overflow:auto;border-top:silver 1px solid;cursor:text;border-right:silver 1px solid;margin:20px 0 10px;padding:4px;" id="codeSnippetWrapper">
+<div style="text-align:left;line-height:12pt;background-color:#f4f4f4;width:100%;font-family:&#39;direction:ltr;color:black;font-size:8pt;overflow:visible;border-style:none;padding:0;" id="codeSnippet">
+<pre style="text-align:left;line-height:12pt;background-color:white;width:100%;font-family:&#39;direction:ltr;color:black;font-size:8pt;overflow:visible;border-style:none;margin:0;padding:0;"><span style="color:#606060;" id="lnum1">   1:</span> lang = OpenSiteWeb&lt;<span style="color:#0000ff;">uint</span>&gt;(url, (s, w) =&gt;</pre>
+<p><!--CRLF--></p>
+<pre style="text-align:left;line-height:12pt;background-color:#f4f4f4;width:100%;font-family:&#39;direction:ltr;color:black;font-size:8pt;overflow:visible;border-style:none;margin:0;padding:0;"><span style="color:#606060;" id="lnum2">   2:</span> {</pre>
+<p><!--CRLF--></p>
+<pre style="text-align:left;line-height:12pt;background-color:white;width:100%;font-family:&#39;direction:ltr;color:black;font-size:8pt;overflow:visible;border-style:none;margin:0;padding:0;"><span style="color:#606060;" id="lnum3">   3:</span>     <span style="color:#0000ff;">return</span> w.Language;</pre>
+<p><!--CRLF--></p>
+<pre style="text-align:left;line-height:12pt;background-color:#f4f4f4;width:100%;font-family:&#39;direction:ltr;color:black;font-size:8pt;overflow:visible;border-style:none;margin:0;padding:0;"><span style="color:#606060;" id="lnum4">   4:</span> }</pre>
+<p><!--CRLF--></div>
+</div>
+<p>Pretty neat, no? It might be overkill, but fun code to write anyway! </p>
+]]></content:encoded>
+			<wfw:commentRss>http://blog.noocyte.net/2009/08/27/dry-in-the-real-world/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Double Key Dictionary</title>
+		<link>http://blog.noocyte.net/2008/02/18/double-key-dictionary/</link>
+		<comments>http://blog.noocyte.net/2008/02/18/double-key-dictionary/#comments</comments>
+		<pubDate>Mon, 18 Feb 2008 21:16:39 +0000</pubDate>
+		<dc:creator><![CDATA[noocyte]]></dc:creator>
+				<category><![CDATA[Personal]]></category>
+		<category><![CDATA[C#]]></category>
+		<category><![CDATA[code]]></category>
+
+		<guid isPermaLink="false">http://noocyte.wordpress.com/2008/02/18/double-key-dictionary/</guid>
+		<description><![CDATA[Double Key Dictionary, or; how to make it really simple to use a dictionary with two keys. In a matter of just weeks I found myself forced to temporarily store values with two unique identifying keys. As an example think about a customer in a web shop who has bought some books. Key number one &#8230; <a href="http://blog.noocyte.net/2008/02/18/double-key-dictionary/" class="more-link">Continue reading <span class="screen-reader-text">Double Key Dictionary</span> <span class="meta-nav">&#8594;</span></a>]]></description>
+				<content:encoded><![CDATA[<p>Double Key Dictionary, or; how to make it really simple to use a dictionary with two keys.</p>
+<p>In a matter of just weeks I found myself forced to temporarily store values with two unique identifying keys. As an example think about a customer in a web shop who has bought some books. Key number one would be the customer ID and then key number two would be the books ISBN number. The value stored could be the books name. Why you would want to do this I have no idea, but it&#8217;s an easy to understand example and it illustrates the problem I had so that everybody can understand it. Its just that I read values from, literally, thousands of Xml logs stored in a database&#8230; Anyway!</p>
+<p>So what you could do is something like this:</p>
+<p><font color="#0000ff" size="2" face="Consolas">Dictionary&lt;string, Dictionary&lt;string, string&gt;&gt; bookList = new Dictionary&lt;string, Dictionary&lt;string, string&gt;&gt;();<br />Dictionary&lt;string, string&gt; innerList = new&#8230;<br />innerList.Add(&#8220;11-22-33&#8243;, &#8220;Lord of the Rings&#8221;);<br />bookList.Add(&#8220;James&#8221;, innerList);</font></p>
+<p>That works and would perhaps be good enough. But what happens if you want to compare two lists of books? And it&#8217;s not unthinkable that you might end up trying to add the same book, for the same person, more than once. How do you handle that? Lots of manual checks? More on my solution later on&#8230;</p>
+<p>Even if I could make the problems outlined above go away (as in create little helper methods to sort them out) I just didn&#8217;t like the syntax. It felt just so wrong. What I wanted would be something like this:</p>
+<p><font color="#0000ff" size="2" face="Consolas">DoubleKeyDictionary&lt;string, string, string&gt; bookListEx = new DoubleKeyDictionary&lt;string, string, string&gt;();<br />bookListEx.Add(&#8220;James&#8221;, &#8220;11-22-33&#8243;, &#8220;Lord of &#8230;&#8221;);</font></p>
+<p>(Abbreviated for clarity)</p>
+<p>So I implemented the DoubleKeyDictionary, as a two key generic dictionary. My implementation also includes IEnumerable&lt;T&gt;, IEquatable&lt;T&gt; and I added an index. All this enables me to use this syntax:</p>
+<p><font color="#0000ff" size="2" face="Consolas">DoubleKeyDictionary&lt;string, string, string&gt; bookListEx = new DoubleKeyDictionary&lt;string, string, string&gt;();<br />bookListEx.Add(&#8220;James&#8221;, &#8220;11-22-33&#8243;, &#8220;Lord of the Rings&#8221;); </font></p>
+<p><font color="#0000ff" size="2" face="Consolas">DoubleKeyDictionary&lt;string, string, string&gt; bookList = new DoubleKeyDictionary&lt;string, string, string&gt;();<br />bookList.Add(&#8220;James&#8221;, &#8220;10-20-30&#8243;, &#8220;Narnia&#8221;); </font></p>
+<p><font color="#0000ff" size="2" face="Consolas">if (bookList.Equals(bookListEx))<br />&nbsp;&nbsp;&nbsp; Console.WriteLine(&#8220;They are equal&#8221;); </font></p>
+<p><font color="#0000ff" size="2" face="Consolas">foreach (DoubleKeyPairValue&lt;string, string, string&gt; books in bookListEx)<br />&nbsp;&nbsp;&nbsp; Console.WriteLine(books.ToString());</font></p>
+<p>Sorry about the bad formatting. <strike>Please </strike><a href="http://cid-3a746453fc8ad1ba.skydrive.live.com/self.aspx/Offentlig/DoubleKeyDictionary.cs" target="_blank"><strike>download the actual code file</strike></a><strike> [new window].</strike> Please feel free to use the code if you like it. If not; tell me why!</p>
+<p>12th of November edit: Code has finally been <a href="https://github.com/noocyte/Util.DoubleKeyDictionary">moved to Github</a>! Please contribute!</p>
+]]></content:encoded>
+			<wfw:commentRss>http://blog.noocyte.net/2008/02/18/double-key-dictionary/feed/</wfw:commentRss>
+		<slash:comments>18</slash:comments>
+		</item>
+		<item>
+		<title>NDepend</title>
+		<link>http://blog.noocyte.net/2007/11/09/ndepend/</link>
+		<comments>http://blog.noocyte.net/2007/11/09/ndepend/#comments</comments>
+		<pubDate>Fri, 09 Nov 2007 13:24:22 +0000</pubDate>
+		<dc:creator><![CDATA[noocyte]]></dc:creator>
+				<category><![CDATA[Geek]]></category>
+		<category><![CDATA[Link]]></category>
+		<category><![CDATA[code]]></category>
+		<category><![CDATA[tool]]></category>
+
+		<guid isPermaLink="false">http://noocyte.wordpress.com/2007/11/09/ndepend/</guid>
+		<description><![CDATA[&#160;Looks really cool! I&#8217;ll have to try it out someday Link to NDepend]]></description>
+				<content:encoded><![CDATA[<p>&nbsp;Looks really cool! I&#8217;ll have to try it out someday</p>
+<p><a href="http://www.ndepend.com/">Link to NDepend</a></p>
+]]></content:encoded>
+			<wfw:commentRss>http://blog.noocyte.net/2007/11/09/ndepend/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+	</channel>
+</rss>

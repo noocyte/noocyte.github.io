@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Home of noocyte &#187; best practice</title>
+	<atom:link href="http://blog.noocyte.net/tag/best-practice/feed/" rel="self" type="application/rss+xml" />
+	<link>http://blog.noocyte.net</link>
+	<description>Ramblings of a mad mind</description>
+	<lastBuildDate>Fri, 04 Apr 2014 13:39:58 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>Storing/sharing/using config info in BizTalk</title>
+		<link>http://blog.noocyte.net/2008/04/15/storingsharingusing-config-info-in-biztalk/</link>
+		<comments>http://blog.noocyte.net/2008/04/15/storingsharingusing-config-info-in-biztalk/#comments</comments>
+		<pubDate>Tue, 15 Apr 2008 09:41:40 +0000</pubDate>
+		<dc:creator><![CDATA[noocyte]]></dc:creator>
+				<category><![CDATA[Geek]]></category>
+		<category><![CDATA[Link]]></category>
+		<category><![CDATA[best practice]]></category>
+		<category><![CDATA[Biztalk]]></category>
+		<category><![CDATA[configuration]]></category>
+
+		<guid isPermaLink="false">http://noocyte.wordpress.com/?p=226</guid>
+		<description><![CDATA[During class today we briefly talked about how you could/should store config info; such as connection strings. Basically there are 4 options; Use a UDC file to store your connections [bad] Manipulate the hosts file on your/dev computer [hack] Use the .config file of the service (BTSNTSvc.exe.config) [ok] Use the SSO database that comes with BizTalk &#8230; <a href="http://blog.noocyte.net/2008/04/15/storingsharingusing-config-info-in-biztalk/" class="more-link">Continue reading <span class="screen-reader-text">Storing/sharing/using config info in BizTalk</span> <span class="meta-nav">&#8594;</span></a>]]></description>
+				<content:encoded><![CDATA[<p>During class today we briefly talked about how you could/should store config info; such as connection strings. Basically there are 4 options;</p>
+<ol>
+<li>Use a <a href="http://msdn2.microsoft.com/en-us/library/ms772017.aspx">UDC file</a> to store your connections [<span style="color:#ff0000;">bad</span>]</li>
+<li>Manipulate the <a href="http://en.wikipedia.org/wiki/Hosts_file">hosts file</a> on your/dev computer [<span style="color:#ffcc00;">hack</span>]</li>
+<li>Use the <a href="http://www.knowdotnet.com/articles/configfiles.html">.config file</a> of the service (BTSNTSvc.exe.config) [<span style="color:#008000;">ok</span>]</li>
+<li>Use the SSO database that comes with BizTalk [<span style="color:#008000;">best practice</span>]</li>
+</ol>
+<p>Now; if your BizTalk installation is just using one server the .config file option might be the best option for you, but for most larger installations you&#8217;re better of using the SSO database. I did a little digging around and found a <a href="http://www.masteringbiztalk.com/blogs/jon/CommentView,guid,6e4b84db-d15f-45e9-b245-08b1eb6c4def.aspx">blog post</a> by <a href="http://www.masteringbiztalk.com/blogs/jon/default.aspx">Jon Flanders</a> describing in detail how to do this; Great! I haven&#8217;t tested it yet, but it looks solid so far.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://blog.noocyte.net/2008/04/15/storingsharingusing-config-info-in-biztalk/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Top 10 Best Practices for Production ASP.NET Applications &#8211; Daptivate &gt; by Kyle Beyer</title>
+		<link>http://blog.noocyte.net/2008/02/19/top-10-best-practices-for-production-aspnet-applications-daptivate-by-kyle-beyer/</link>
+		<comments>http://blog.noocyte.net/2008/02/19/top-10-best-practices-for-production-aspnet-applications-daptivate-by-kyle-beyer/#comments</comments>
+		<pubDate>Tue, 19 Feb 2008 13:10:39 +0000</pubDate>
+		<dc:creator><![CDATA[noocyte]]></dc:creator>
+				<category><![CDATA[Geek]]></category>
+		<category><![CDATA[Link]]></category>
+		<category><![CDATA[asp.net]]></category>
+		<category><![CDATA[best practice]]></category>
+		<category><![CDATA[release]]></category>
+
+		<guid isPermaLink="false">http://noocyte.wordpress.com/?p=170</guid>
+		<description><![CDATA[Good list. Follow it and avoid some of the common problems. &#160; Link to Top 10 Best Practices for Production ASP.NET Applications &#8211; Daptivate &#62; by Kyle Beyer]]></description>
+				<content:encoded><![CDATA[<p>Good list. Follow it and avoid some of the common problems. <img src="http://blog.noocyte.net/wp-includes/images/smilies/simple-smile.png" alt=":)" class="wp-smiley" style="height: 1em; max-height: 1em;" />&nbsp;</p>
+<p><a href="http://daptivate.com/archive/2008/02/12/top-10-best-practices-for-production-asp-net-applications.aspx">Link to Top 10 Best Practices for Production ASP.NET Applications &#8211; Daptivate &gt; by Kyle Beyer</a></p>
+]]></content:encoded>
+			<wfw:commentRss>http://blog.noocyte.net/2008/02/19/top-10-best-practices-for-production-aspnet-applications-daptivate-by-kyle-beyer/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+	</channel>
+</rss>

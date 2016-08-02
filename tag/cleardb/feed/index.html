@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Home of noocyte &#187; cleardb</title>
+	<atom:link href="http://blog.noocyte.net/tag/cleardb/feed/" rel="self" type="application/rss+xml" />
+	<link>http://blog.noocyte.net</link>
+	<description>Ramblings of a mad mind</description>
+	<lastBuildDate>Fri, 04 Apr 2014 13:39:58 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>My blog just died and was brought back from the dead!</title>
+		<link>http://blog.noocyte.net/2013/01/22/my-blog-just-died-and-was-brought-back-from-the-dead/</link>
+		<comments>http://blog.noocyte.net/2013/01/22/my-blog-just-died-and-was-brought-back-from-the-dead/#comments</comments>
+		<pubDate>Tue, 22 Jan 2013 13:58:05 +0000</pubDate>
+		<dc:creator><![CDATA[noocyte]]></dc:creator>
+				<category><![CDATA[Personal]]></category>
+		<category><![CDATA[azure]]></category>
+		<category><![CDATA[cleardb]]></category>
+		<category><![CDATA[mysql]]></category>
+		<category><![CDATA[wordpress]]></category>
+
+		<guid isPermaLink="false">http://blog.noocyte.net/?p=1222</guid>
+		<description><![CDATA[The other day I noticed that I got an error message when trying to read my blog. Basically it said that the database connection was not behaving and WordPress was unable to load my blog. Auch I thought and started to wonder what could be wrong. The thing is, I run this blog on Microsoft &#8230; <a href="http://blog.noocyte.net/2013/01/22/my-blog-just-died-and-was-brought-back-from-the-dead/" class="more-link">Continue reading <span class="screen-reader-text">My blog just died and was brought back from the dead!</span> <span class="meta-nav">&#8594;</span></a>]]></description>
+				<content:encoded><![CDATA[<p>The other day I noticed that I got an error message when trying to read my blog. Basically it said that the database connection was not behaving and WordPress was unable to load my blog. Auch I thought and started to wonder what could be wrong. The thing is, I run this blog on <a href="http://www.windowsazure.com/en-us/home/scenarios/web-sites/">Microsoft Windows Azure Web Sites</a>, using the WordPress application from their gallery. I have done very little to set it up, apart from the custom domain name. The blog was running on <a href="http://noocyte.azurewebsites.net/">http://noocyte.azurewebsites.net/</a> and I setup a CNAME record to point to <a href="http://blog.noocyte.net/">http://blog.noocyte.net/</a>. All fun and games, until the database broke down… </p>
+<p>Another interesting tidbit; the database is mySQL and is running in Azure, but it’s operated by ClearDB, not Microsoft. And <a href="https://www.cleardb.com/home.view">ClearDB</a> has no integration with the regular Azure control panel. In fact I am still unaware of how to manage my database…</p>
+<p>Anyway I went into the Azure portal and had a look at my blog web site; all peachy! The database is listed as a linked resource and all lights were green. So I googled with Bing and came up with <a href="http://social.msdn.microsoft.com/Forums/en-US/ssdsgetstarted/thread/a2fe0bd6-7e46-4350-af00-158b296d8dfd">one decent answer</a>; the load on the database could be exceeding the allowed load by ClearDB. But how on earth this blog could attain such a load was a mystery to me… So I <a href="http://social.msdn.microsoft.com/Forums/en-US/windowsazurewebsitespreview/thread/a9a02261-85e1-4f87-97dd-cf08e9e58548">posted a question</a> of my own on MSDN Forums and fairly soon a representative from Microsoft came back to me suggesting that I contact ClearDB and making them ‘adjust’ the database connections limit. So I filled out <a href="https://www.cleardb.com/contact.html">their form</a> and waited. In fact I waited 4 days and heard nothing. On Monday I tweeted:</p>
+<p><a href="http://blog.noocyte.net/wp-content/uploads/2013/01/tweet1.png"><img title="tweet1" style="border-top: 0px; border-right: 0px; background-image: none; border-bottom: 0px; padding-top: 0px; padding-left: 0px; margin: 0px 0px 0px 30px; border-left: 0px; display: inline; padding-right: 0px" border="0" alt="tweet1" src="http://blog.noocyte.net/wp-content/uploads/2013/01/tweet1_thumb.png" width="640" height="182"></a></p>
+<p>They came back to me and suggested I fill out their contact form again, which I did. This time they came back within the hour and told me that my database had been “de-provisioned by a call that was made from Windows Azure on Thursday, January 10th at 15:21 UTC”! De-provisioned means deleted in my book; not cool! </p>
+<p>Long story short, they were able to restore the database into a new database and everything was OK. They are now investigating why this de-provisioning call was made, I sure as heck didn’t make it! And the database is still listed as a linked resource in the Azure portal! </p>
+<p>As a side note; since the blog was down anyway and I had to create a new database I finally created my own subscription in Azure, separate from my work subscriptions, to host the blog. Will cost me a bit of money, but feels good to pay for services I use!</p>
+]]></content:encoded>
+			<wfw:commentRss>http://blog.noocyte.net/2013/01/22/my-blog-just-died-and-was-brought-back-from-the-dead/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+	</channel>
+</rss>

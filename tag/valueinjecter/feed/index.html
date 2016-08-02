@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Home of noocyte &#187; ValueInjecter</title>
+	<atom:link href="http://blog.noocyte.net/tag/valueinjecter/feed/" rel="self" type="application/rss+xml" />
+	<link>http://blog.noocyte.net</link>
+	<description>Ramblings of a mad mind</description>
+	<lastBuildDate>Fri, 04 Apr 2014 13:39:58 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>ValueInjecter and Expression Magic</title>
+		<link>http://blog.noocyte.net/2011/10/28/valueinjecter-and-expression-magic/</link>
+		<comments>http://blog.noocyte.net/2011/10/28/valueinjecter-and-expression-magic/#comments</comments>
+		<pubDate>Fri, 28 Oct 2011 08:53:00 +0000</pubDate>
+		<dc:creator><![CDATA[noocyte]]></dc:creator>
+				<category><![CDATA[Geek]]></category>
+		<category><![CDATA[ValueInjecter]]></category>
+
+		<guid isPermaLink="false">https://noocyte.wordpress.com/2011/10/28/valueinjecter-and-expression-magic/</guid>
+		<description><![CDATA[In a previous post I have talked some about how I use AutoMapper and I’m using it for all my “Entity To View” model mappings; works like a charm! But what it does not do is to map the other way; ie. take whatever comes from the view and apply that to an entity model. &#8230; <a href="http://blog.noocyte.net/2011/10/28/valueinjecter-and-expression-magic/" class="more-link">Continue reading <span class="screen-reader-text">ValueInjecter and Expression Magic</span> <span class="meta-nav">&#8594;</span></a>]]></description>
+				<content:encoded><![CDATA[<p>In a previous post I have talked some about how I use AutoMapper and I’m using it for all my “Entity To View” model mappings; works like a charm! But what it does not do is to map the other way; ie. take whatever comes from the view and apply that to an entity model. There are some discussions online on the ‘correctness’ of doing this, but I found it to be an easy and productive technique. </p>
+<p>But since AutoMapper doesn’t handle this I had to write a lot of LHS-RHS code, right? No I didn’t! Somebody else have already solved this problem in a utility called ValueInjecter. Basically it’s capable of injecting values from one object to another, and this of course is exactly what I need! So how do I use it;</p>
+<blockquote><p>var entityObject = db.GetEntity(viewObject.UniqueId);<br />entityObject.InjectFrom&lt;CustomInjectionRules&gt;(viewObject);<br />entityObject.State = EntityState.Modified;<br />db.Store(entityObject);</p>
+</blockquote>
+<p>The magic happens on line number two; the InjectFrom method will transfer data from my viewObject to the entityObject. The method can be used without specifying a type (generics) to assist in the injection, but I need it to allow for data type and naming variations between the two objects. The CustomInjectionRules class handles those two issues and looks a little like this:</p>
+<p>public class CustomInjectionRules : ConventionInjection<br />&nbsp;&nbsp; {<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; protected override bool Match(ConventionInfo c)<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return c.SourceProp.Name.Equals(“ViewProp”) &amp;&amp; c.TargetProp.Name.Equals(“EntityProp”);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; protected override object SetValue(ConventionInfo c)<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return Convert.ToInt32(c.SourceProp.Value);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</p>
+<p>&nbsp;&nbsp; }</p>
+<p>The class inherits from “ConventionInjection” and overrides two methods; one for matching properties with unequal names and the second for converting between whatever “ViewProp” is and int32 (“EntityProp”).</p>
+<p>After writing this code I made sure it worked and then came back to look at it; could I improve it? Refactor it somehow? Not much code in there, so my first instinct was; No, this is fine. But then I looked hard at the “Magic Strings” (“ViewProp”/”EntityProp”)… I do not like magic strings! No refactor/compile time support and all that nonsense. So I had to find a better solution! I immediately thought of another blog post I’d done some time ago; <a href="http://noocyte.wordpress.com/2011/10/04/mvc-3-ef-4-1-and-some-more/">MVC 3, EF 4.1 And Some More…</a> The HtmlHelper methods appear to just take a lambda expression as input and then figures out the name of the property! Which of course is exactly what I needed! So I started Googling… I found a few examples, but they weren’t spot on before I found a <a href="http://stackoverflow.com/questions/671968/retrieving-property-name-from-lambda-expression">question</a> on <a href="http://stackoverflow.com">StackOverflow</a>! Spot on! I did some minor adjustments and not my CustomInjectionRules class looks like this:</p>
+<p>public class EvaluationRuleTypeInjection : ConventionInjection<br />{<br />&nbsp;&nbsp;&nbsp; protected override bool Match(ConventionInfo c)<br />&nbsp;&nbsp;&nbsp; {<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return c.SourceProp.Name.Equals(GetMemberInfo&lt;ViewObject&gt;(r =&gt; r.ViewProp)) <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &amp;&amp; c.TargetProp.Name.Equals(GetMemberInfo&lt;EntityObject&gt;(r =&gt; r.EntityProp));&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <br />&nbsp;&nbsp;&nbsp; }</p>
+<p>&nbsp;&nbsp;&nbsp; protected override object SetValue(ConventionInfo c)<br />&nbsp;&nbsp;&nbsp; {<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return Convert.ToInt32(c.SourceProp.Value);<br />&nbsp;&nbsp;&nbsp; }</p>
+<p>&nbsp;&nbsp;&nbsp; private string GetMemberInfo&lt;T&gt;(Expression&lt;Func&lt;T, object&gt;&gt; method)<br />&nbsp;&nbsp;&nbsp; {<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LambdaExpression lambda = method as LambdaExpression;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (lambda == null)<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; throw new ArgumentNullException(&#8220;method&#8221;);</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; MemberExpression memberExpr = null;</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (lambda.Body.NodeType == ExpressionType.Convert)<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; memberExpr = ((UnaryExpression)lambda.Body).Operand as MemberExpression;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; else if (lambda.Body.NodeType == ExpressionType.MemberAccess)<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; memberExpr = lambda.Body as MemberExpression;</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (memberExpr == null)<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; throw new ArgumentException(&#8220;method&#8221;);</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return memberExpr.Member.Name;<br />&nbsp;&nbsp;&nbsp; }<br />}</p>
+<p>Awesome! I immediatly moved the “GetMemberInfo” method out of this class and into a more appropriate class, but included it here to avoid expanding all the code… </p>
+<p>Pretty happy about this change. Also loving how easy it is to get stuff such as ValueInjecter into my prosjects using <a href="http://nuget.org/">nuget</a>.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://blog.noocyte.net/2011/10/28/valueinjecter-and-expression-magic/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+	</channel>
+</rss>

@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Home of noocyte &#187; mvc</title>
+	<atom:link href="http://blog.noocyte.net/tag/mvc/feed/" rel="self" type="application/rss+xml" />
+	<link>http://blog.noocyte.net</link>
+	<description>Ramblings of a mad mind</description>
+	<lastBuildDate>Fri, 04 Apr 2014 13:39:58 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>Howto use configurable rolenames to authorize attribute</title>
+		<link>http://blog.noocyte.net/2011/10/10/howto-use-configurable-rolenames-to-authorize-attribute/</link>
+		<comments>http://blog.noocyte.net/2011/10/10/howto-use-configurable-rolenames-to-authorize-attribute/#comments</comments>
+		<pubDate>Mon, 10 Oct 2011 11:40:00 +0000</pubDate>
+		<dc:creator><![CDATA[noocyte]]></dc:creator>
+				<category><![CDATA[Geek]]></category>
+		<category><![CDATA[mvc]]></category>
+		<category><![CDATA[security]]></category>
+
+		<guid isPermaLink="false">https://noocyte.wordpress.com/2011/10/10/howto-use-configurable-rolenames-to-authorize-attribute/</guid>
+		<description><![CDATA[For one of my ASP.Net MVC 3 projects I make heavy use of the “[Authorize(Roles=…)]” syntax, but the fact that I have to type in the rolename there always rubbed me the wrong way. I started to experiment to see if I could perhaps use some code to get the rolename from configuration or something. &#8230; <a href="http://blog.noocyte.net/2011/10/10/howto-use-configurable-rolenames-to-authorize-attribute/" class="more-link">Continue reading <span class="screen-reader-text">Howto use configurable rolenames to authorize attribute</span> <span class="meta-nav">&#8594;</span></a>]]></description>
+				<content:encoded><![CDATA[<p>For one of my ASP.Net MVC 3 projects I make heavy use of the “[Authorize(Roles=…)]” syntax, but the fact that I have to type in the rolename there always rubbed me the wrong way. I started to experiment to see if I could perhaps use some code to get the rolename from configuration or something. By default I could not, but it was possible to inherit from the Authorize attribute and create my own to make this possible. And so that’s what I did, here is the code:</p>
+<blockquote><p>public class SecureAttribute : AuthorizeAttribute<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp; public SecureAttribute() : this(true)<br />&nbsp;&nbsp;&nbsp;&nbsp; {<br />&nbsp;&nbsp;&nbsp;&nbsp; }</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp; public SecureAttribute(bool requireAdmin) : base()<br />&nbsp;&nbsp;&nbsp;&nbsp; {<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (requireAdmin)<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; this.Roles = Configuration.AdminRoleName;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br />&nbsp;&nbsp;&nbsp;&nbsp; }<br />}</p>
+</blockquote>
+<p>To use it:</p>
+<blockquote><p>[Secure]<br />public abstract class SecureController : Controller</p>
+</blockquote>
+<p>Basically all I do is add two constructors to enable me to set the “Roles” property to whatever I have configured it to be. Now, this code is tailor to my specific project, so you wanna change stuff to match your requirements. Please also note that I use a “SecureController” that all my Controllers inherit from if they require Admin access. I did this to save exactly one line of code on all of my controllers! So instead of inheriting from just “Controller” and adding the “Secure” attribute they just inherit from “SecureController”, which has the attribute and inherits from “Controller”. Perhaps a bit over the top, but you never know; one day I might add some more stuff here.</p>
+<p>If anyone can see anything wrong with this implementation, please let me know! I am fairly new to MVC and the ASP.Net Membership stuff… <img style="border-style:none;" class="wlEmoticon wlEmoticon-smile" alt="Smilefjes" src="http://noocyte.files.wordpress.com/2011/10/wlemoticon-smile.png"></p>
+]]></content:encoded>
+			<wfw:commentRss>http://blog.noocyte.net/2011/10/10/howto-use-configurable-rolenames-to-authorize-attribute/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>MVC 3, EF 4.1 and some more…</title>
+		<link>http://blog.noocyte.net/2011/10/04/mvc-3-ef-4-1-and-some-more/</link>
+		<comments>http://blog.noocyte.net/2011/10/04/mvc-3-ef-4-1-and-some-more/#comments</comments>
+		<pubDate>Tue, 04 Oct 2011 08:33:00 +0000</pubDate>
+		<dc:creator><![CDATA[noocyte]]></dc:creator>
+				<category><![CDATA[Geek]]></category>
+		<category><![CDATA[generics]]></category>
+		<category><![CDATA[mvc]]></category>
+
+		<guid isPermaLink="false">https://noocyte.wordpress.com/?p=347</guid>
+		<description><![CDATA[So I’ve begun work on a new application, using ASP.Net MVC 3 (with Razor) and Entity Framework 4.1 (Code First). So far it looks like a good combo of technology, some head-aches and obstacles, but with the help of Google I’ve found my way through them all. Earlier today I needed to do an “if &#8230; <a href="http://blog.noocyte.net/2011/10/04/mvc-3-ef-4-1-and-some-more/" class="more-link">Continue reading <span class="screen-reader-text">MVC 3, EF 4.1 and some more…</span> <span class="meta-nav">&#8594;</span></a>]]></description>
+				<content:encoded><![CDATA[<p>So I’ve begun work on a new application, using ASP.Net MVC 3 (with Razor) and Entity Framework 4.1 (Code First). So far it looks like a good combo of technology, some head-aches and obstacles, but with the help of Google I’ve found my way through them all.</p>
+<p>Earlier today I needed to do an “if check” before printing some data on a page, so I did something like this:</p>
+<blockquote><p>@if(!String.IsNullOrEmpty(item.Compliant))<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @Html.DisplayFor(modelItem =&gt; item.Deadline, Model)<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</p>
+</blockquote>
+<p>And then on the next line I did the exact same, but for a different property (ie. not “Deadline”). I felt a slight pain as I repeated myself (ie. the if test) and started to look at how to avoid that. I tried a number of different things, all documented below.</p>
+<h3>1. Custom code to do check and return value</h3>
+<p>My first attempt was to just take the code out of the view and put it in a static class. The code looked a little like this:</p>
+<blockquote><p>public static string DisplayBasedOnCompliantStatus(SomeClass eval, string displayText)<br />{<br />&nbsp;&nbsp;&nbsp; if (!String.IsNullOrWhiteSpace(eval.Compliant) &amp;&amp; eval.Compliant.Equals(&#8220;Yes&#8221;, StringComparison.InvariantCultureIgnoreCase))<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return displayText;</p>
+<p>&nbsp;&nbsp;&nbsp; return String.Empty;<br />}</p>
+</blockquote>
+<p>This code worked as expected, but the return value was a string, so I lost the dataformatting of the input value (DateTime). So i figured there had to be a better way… </p>
+<h3>2. Reuse of “DisplayFor” extension methods</h3>
+<p>For my next attempt I tried to take as input whatever I needed to use to call the “Html.DisplayFor” method I used in the view code. One of my attempts looked a little like this:</p>
+<blockquote><p>public static MvcHtmlString DisplayOnlyIfCompliant&lt;TValue&gt;(HtmlHelper&lt;TModel&gt; html, TModel model, Expression&lt;Func&lt;TModel, string&gt;&gt; compliantExpression, Expression&lt;Func&lt;TModel, TValue&gt;&gt; expression)<br />{<br />&nbsp;&nbsp;&nbsp; Func&lt;TModel, string&gt; deleg = compliantExpression.Compile();<br />&nbsp;&nbsp;&nbsp; var compliant = deleg(model);<br />&nbsp;&nbsp;&nbsp; if (!String.IsNullOrWhiteSpace(compliant) &amp;&amp; compliant.Equals(&#8220;Yes&#8221;, StringComparison.InvariantCultureIgnoreCase))<br />&nbsp;&nbsp;&nbsp; {<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return html.DisplayFor(expression);<br />&nbsp;&nbsp;&nbsp; }</p>
+<p>&nbsp;&nbsp;&nbsp; return new MvcHtmlString(null);<br />}</p>
+</blockquote>
+<p>This I could never make work, not even compile, but I felt as if I was on the right track. </p>
+<h3>3. Create another extension method</h3>
+<p>For my third attempt I had a very close look at the orignal method (“Html.DisplayFor”) and suddenly realized that it was an extension method and I could probably create another extension method myself! So the third attempt looks like this:</p>
+<blockquote><p>public static MvcHtmlString DisplayFor&lt;TModel, TValue&gt;(this HtmlHelper&lt;TModel&gt; html, Expression&lt;Func&lt;TModel, TValue&gt;&gt; expression, SomeClass model)<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (!String.IsNullOrWhiteSpace(model.Compliant) &amp;&amp; model.Compliant.Equals(&#8220;Yes&#8221;, StringComparison.InvariantCultureIgnoreCase))<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return html.DisplayFor&lt;TModel, TValue&gt;(expression);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return new MvcHtmlString(null);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</p>
+</blockquote>
+<p>And what-do-you-know? It works! To use it all I had to do was this:</p>
+<blockquote><p>@Html.DisplayFor(modelItem =&gt; item.Deadline, Model)</p>
+</blockquote>
+<p>But when looking at the code I can see that it’s a little less flexible than it could have been. What if I need the same functionality for another property beside “Compliant”? Then I have to create another method, rename the original (it already has a bad name!) and then I’m back to repeating myself! So a fourth attempt should be tried!</p>
+<h3>4. generic Extension method</h3>
+<p>My final requirement is that the extension method can handle any model to check for null-string. This meant that I had to take the model specific code out of my extension method and add another parameter to be able to define the property to check for null-string. The code looks like this:</p>
+<blockquote><p>&nbsp;&nbsp;&nbsp; public static MvcHtmlString DisplayFor&lt;TModel, TValue&gt;(<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; this HtmlHelper&lt;TModel&gt; html, <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Expression&lt;Func&lt;TModel, TValue&gt;&gt; expression, <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Expression&lt;Func&lt;TModel, string&gt;&gt; compliantExpression,<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; TModel model)<br />&nbsp;&nbsp;&nbsp; {<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var compliant = compliantExpression<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; .Compile()<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; .Invoke(model);</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (!String.IsNullOrWhiteSpace(compliant) &amp;&amp; compliant.Equals(&#8220;Yes&#8221;, StringComparison.InvariantCultureIgnoreCase))<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return html.DisplayFor&lt;TModel, TValue&gt;(expression);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return new MvcHtmlString(null);<br />&nbsp;&nbsp;&nbsp; }<br />}</p>
+</blockquote>
+<p>And in use:</p>
+<blockquote><p>@Html.DisplayFor(m =&gt; item.PropertyToDisplay, c =&gt; item.PropertyToCheck, Model)</p>
+</blockquote>
+<p>I guess it would be possible to do a more generic “null check”, so let’s make a fifth attempt… </p>
+<h3>5. 100% Pure Generic Extension Method</h3>
+<p>The final step in making the extension method 100% pure from any “non-generic noise” is to remove the “string” part in the “compliantExpression” input definition. There is really just one obstacle to make that happen; I need a generic null check. I tried using “IComparable” and requiring the input type to inherit from it, but this caused some issues when it was null (NullReferenceException). So I had to do a som Googling and found a <a href="http://stackoverflow.com/questions/65351/null-or-default-comparsion-of-generic-argument-in-c">great question</a> on <a href="http://stackoverflow.com/">Stackoverflow</a> that helped me out! Turns out I can write the method like this:</p>
+<blockquote><p>public static MvcHtmlString DisplayFor&lt;TModel, TValue, TCheck&gt;(<br />this HtmlHelper&lt;TModel&gt; html,<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Expression&lt;Func&lt;TModel, TValue&gt;&gt; expression,<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Expression&lt;Func&lt;TModel, TCheck&gt;&gt; compliantExpression,<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; TModel model)</p>
+<p>{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; TCheck compliant = compliantExpression<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; .Compile()<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; .Invoke(model);</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (!Equals(compliant, default(TCheck)))<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return html.DisplayFor&lt;TModel, TValue&gt;(expression);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return new MvcHtmlString(null);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br />}</p>
+</blockquote>
+<p>And of course no need to adjust how we call the method, since types are inferred when using expressions (I guess?). </p>
+<p>There is however a serious issue with the extension method now; I’ m only testing for “null”, not for an actual value compare, which of course I need… So, enter attempt number six.</p>
+<h3>6. 100% Pure Generic Extenstion Method with compare function</h3>
+<p>I had to make it possible to compare the actual value with a provided value, such as “Yes” or “1”. To do this I needed to add a parameter to the method enabling the caller to input a function to compare the value of “valueExpression” with a caller defined value. It now looks like this:</p>
+<blockquote><p>public static MvcHtmlString DisplayForIfEqual&lt;TModel, TValue, TCheck&gt;(<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; this HtmlHelper&lt;TModel&gt; html,<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Expression&lt;Func&lt;TModel, TValue&gt;&gt; valueExpression,<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Expression&lt;Func&lt;TModel, TCheck&gt;&gt; checkExpression,<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Func&lt;TCheck, bool&gt; compareFunction,<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; TModel model)<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; TCheck checkValue = checkExpression<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; .Compile()<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; .Invoke(model);</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (!Equals(checkValue, default(TCheck)) &amp;&amp; compareFunction(checkValue))<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return html.DisplayFor&lt;TModel, TValue&gt;(valueExpression);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return new MvcHtmlString(null);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</p>
+</blockquote>
+<p>To call it:</p>
+<blockquote><p>@Html.DisplayForIfEqual(<br />m =&gt; item.SomeDisplayProperty, <br />c =&gt; item.SomeCheckProperty,<br />m =&gt; m.Equals(&#8220;No&#8221;, StringComparison.InvariantCultureIgnoreCase),<br />Model)</p>
+</blockquote>
+<p>A curiosity is that the “m” variable does not give you IntelliSense in Visual Studio today. I was puzzled by this, but no big deal really. </p>
+<p>There might be some issues with the “Equals” method in the null-check (like boxing), but for now I’ll be using this method.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://blog.noocyte.net/2011/10/04/mvc-3-ef-4-1-and-some-more/feed/</wfw:commentRss>
+		<slash:comments>1</slash:comments>
+		</item>
+		<item>
+		<title>Brad Abrams : ASP.NET MVC Example Application over Northwind with the Entity Framework</title>
+		<link>http://blog.noocyte.net/2008/02/01/brad-abrams-aspnet-mvc-example-application-over-northwind-with-the-entity-framework/</link>
+		<comments>http://blog.noocyte.net/2008/02/01/brad-abrams-aspnet-mvc-example-application-over-northwind-with-the-entity-framework/#comments</comments>
+		<pubDate>Fri, 01 Feb 2008 12:53:00 +0000</pubDate>
+		<dc:creator><![CDATA[noocyte]]></dc:creator>
+				<category><![CDATA[Link]]></category>
+		<category><![CDATA[asp.net]]></category>
+		<category><![CDATA[mvc]]></category>
+
+		<guid isPermaLink="false">http://noocyte.wordpress.com/?p=127</guid>
+		<description><![CDATA[Nice!&#160;I really, really wanna&#160;look into ASP.Net MVC. I haven&#8217;t done any ASP.Net development in years, so I sort of miss it. But then I really wanna learn WPF and WCF&#160;too&#8230; So there you have it!&#160; Link to Brad Abrams : ASP.NET MVC Example Application over Northwind with the Entity Framework]]></description>
+				<content:encoded><![CDATA[<p>Nice!&nbsp;I really, really wanna&nbsp;look into ASP.Net MVC. I haven&#8217;t done any ASP.Net development in years, so I sort of miss it. But then I really wanna learn WPF and WCF&nbsp;too&#8230; So there you have it!&nbsp;</p>
+<p><a href="http://blogs.msdn.com/brada/archive/2008/01/29/asp-net-mvc-example-application-over-northwind-with-the-entity-framework.aspx">Link to Brad Abrams : ASP.NET MVC Example Application over Northwind with the Entity Framework</a></p>
+]]></content:encoded>
+			<wfw:commentRss>http://blog.noocyte.net/2008/02/01/brad-abrams-aspnet-mvc-example-application-over-northwind-with-the-entity-framework/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Rob Conery » ASP.NET MVC: Using RESTful Architecture</title>
+		<link>http://blog.noocyte.net/2007/12/07/rob-conery-aspnet-mvc-using-restful-architecture/</link>
+		<comments>http://blog.noocyte.net/2007/12/07/rob-conery-aspnet-mvc-using-restful-architecture/#comments</comments>
+		<pubDate>Fri, 07 Dec 2007 14:39:11 +0000</pubDate>
+		<dc:creator><![CDATA[noocyte]]></dc:creator>
+				<category><![CDATA[Geek]]></category>
+		<category><![CDATA[Link]]></category>
+		<category><![CDATA[.net]]></category>
+		<category><![CDATA[asp.net]]></category>
+		<category><![CDATA[mvc]]></category>
+		<category><![CDATA[rest]]></category>
+
+		<guid isPermaLink="false">http://noocyte.wordpress.com/2007/12/07/rob-conery-aspnet-mvc-using-restful-architecture/</guid>
+		<description><![CDATA[REST looks interesting, but not 100% sure I really get the&#160;value-prop from it.&#160;&#160; Link to Rob Conery » ASP.NET MVC: Using RESTful Architecture]]></description>
+				<content:encoded><![CDATA[<p>REST looks interesting, but not 100% sure I <u>really</u> get the&nbsp;value-prop from it.&nbsp;&nbsp;</p>
+<p><a href="http://blog.wekeroad.com/2007/12/06/aspnet-mvc-using-restful-architecture/">Link to Rob Conery » ASP.NET MVC: Using RESTful Architecture</a></p>
+]]></content:encoded>
+			<wfw:commentRss>http://blog.noocyte.net/2007/12/07/rob-conery-aspnet-mvc-using-restful-architecture/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>ASP.NET MVC Framework (Part 1) &#8211; ScottGu&#8217;s Blog</title>
+		<link>http://blog.noocyte.net/2007/11/14/aspnet-mvc-framework-part-1-scottgus-blog/</link>
+		<comments>http://blog.noocyte.net/2007/11/14/aspnet-mvc-framework-part-1-scottgus-blog/#comments</comments>
+		<pubDate>Wed, 14 Nov 2007 11:24:59 +0000</pubDate>
+		<dc:creator><![CDATA[noocyte]]></dc:creator>
+				<category><![CDATA[Link]]></category>
+		<category><![CDATA[.net]]></category>
+		<category><![CDATA[asp.net]]></category>
+		<category><![CDATA[mvc]]></category>
+
+		<guid isPermaLink="false">http://noocyte.wordpress.com/2007/11/14/aspnet-mvc-framework-part-1-scottgus-blog/</guid>
+		<description><![CDATA[Might be interesting, but not for Synergi, we&#8217;re basically using our own framework to do this&#8230;&#160; Link to ASP.NET MVC Framework (Part 1) &#8211; ScottGu&#8217;s Blog]]></description>
+				<content:encoded><![CDATA[<p>Might be interesting, but not for Synergi, we&#8217;re basically using our own framework to do this&#8230;&nbsp;</p>
+<p><a href="http://weblogs.asp.net/scottgu/archive/2007/11/13/asp-net-mvc-framework-part-1.aspx">Link to ASP.NET MVC Framework (Part 1) &#8211; ScottGu&#8217;s Blog</a></p>
+]]></content:encoded>
+			<wfw:commentRss>http://blog.noocyte.net/2007/11/14/aspnet-mvc-framework-part-1-scottgus-blog/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+	</channel>
+</rss>

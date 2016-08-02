@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<!--[if IE 7]>
+<html class="ie ie7" lang="en-US">
+<![endif]-->
+<!--[if IE 8]>
+<html class="ie ie8" lang="en-US">
+<![endif]-->
+<!--[if !(IE 7) & !(IE 8)]><!-->
+<html lang="en-US">
+<!--<![endif]-->
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width">
+	<title>C# | Home of noocyte</title>
+	<link rel="profile" href="http://gmpg.org/xfn/11">
+	<link rel="pingback" href="http://blog.noocyte.net/xmlrpc.php">
+	<!--[if lt IE 9]>
+	<script src="http://blog.noocyte.net/wp-content/themes/twentythirteen/js/html5.js"></script>
+	<![endif]-->
+	<link rel="alternate" type="application/rss+xml" title="Home of noocyte &raquo; Feed" href="../../feed/index.html" />
+<link rel="alternate" type="application/rss+xml" title="Home of noocyte &raquo; Comments Feed" href="../../comments/feed/index.html" />
+<link rel="alternate" type="application/rss+xml" title="Home of noocyte &raquo; C# Tag Feed" href="feed/index.html" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"http:\/\/s.w.org\/images\/core\/emoji\/72x72\/","ext":".png","source":{"concatemoji":"http:\/\/blog.noocyte.net\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.2.2"}};
+			!function(a,b,c){function d(a){var c=b.createElement("canvas"),d=c.getContext&&c.getContext("2d");return d&&d.fillText?(d.textBaseline="top",d.font="600 32px Arial","flag"===a?(d.fillText(String.fromCharCode(55356,56812,55356,56807),0,0),c.toDataURL().length>3e3):(d.fillText(String.fromCharCode(55357,56835),0,0),0!==d.getImageData(16,16,1,1).data[0])):!1}function e(a){var c=b.createElement("script");c.src=a,c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g;c.supports={simple:d("simple"),flag:d("flag")},c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.simple&&c.supports.flag||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='stylesheet' id='twentythirteen-fonts-css'  href='http://fonts.googleapis.com/css?family=Source+Sans+Pro%3A300%2C400%2C700%2C300italic%2C400italic%2C700italic%7CBitter%3A400%2C700&amp;subset=latin%2Clatin-ext' type='text/css' media='all' />
+<link rel='stylesheet' id='genericons-css'  href='../../wp-content/themes/twentythirteen/genericons/genericons.css@ver=3.03.css' type='text/css' media='all' />
+<link rel='stylesheet' id='twentythirteen-style-css'  href='../../wp-content/themes/twentythirteen/style.css@ver=2013-07-18.css' type='text/css' media='all' />
+<!--[if lt IE 9]>
+<link rel='stylesheet' id='twentythirteen-ie-css'  href='http://blog.noocyte.net/wp-content/themes/twentythirteen/css/ie.css?ver=2013-07-18' type='text/css' media='all' />
+<![endif]-->
+<script type='text/javascript' src='../../wp-includes/js/jquery/jquery.js@ver=1.11.2'></script>
+<script type='text/javascript' src='../../wp-includes/js/jquery/jquery-migrate.min.js@ver=1.2.1'></script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="../../xmlrpc.php@rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="../../wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 4.2.2" />
+<!-- Copy this script into your html file to enable Application Insights -->
+<script type="text/javascript">
+    window.appInsights={queue:[],applicationInsightsId:null,accountId:null,appUserId:null,configUrl:null,start:function(n){function u(n,t){n[t]=function(){var i=arguments;n.queue.push(function(){n[t].apply(n,i)})}}function f(n){var t=document.createElement("script");return t.type="text/javascript",t.src=n,t.async=!0,t}function r(){i.appendChild(f("//az416426.vo.msecnd.net/scripts/ai.0.js"))}var i,t;this.applicationInsightsId=n;u(this,"logEvent");u(this,"logPageView");i=document.getElementsByTagName("script")[0].parentNode;this.configUrl===null?r():(t=f(this.configUrl),t.onload=r,t.onerror=r,i.appendChild(t));this.start=function(){}}};
+
+    appInsights.start("5e97fe9e-52e7-4eab-8869-5501ea0cdbe9");
+    appInsights.logPageView();
+</script>	<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+	<style type="text/css" id="twentythirteen-header-css">
+			.site-header {
+			background: url(../../wp-content/themes/twentythirteen/images/headers/circle.png) no-repeat scroll top;
+			background-size: 1600px auto;
+		}
+		@media (max-width: 767px) {
+			.site-header {
+				background-size: 768px auto;
+			}
+		}
+		@media (max-width: 359px) {
+			.site-header {
+				background-size: 360px auto;
+			}
+		}
+		</style>
+	</head>
+
+<body class="archive tag tag-c tag-27 single-author">
+	<div id="page" class="hfeed site">
+		<header id="masthead" class="site-header" role="banner">
+			<a class="home-link" href="../../index.html" title="Home of noocyte" rel="home">
+				<h1 class="site-title">Home of noocyte</h1>
+				<h2 class="site-description">Ramblings of a mad mind</h2>
+			</a>
+
+			<div id="navbar" class="navbar">
+				<nav id="site-navigation" class="navigation main-navigation" role="navigation">
+					<button class="menu-toggle">Menu</button>
+					<a class="screen-reader-text skip-link" href="index.html#content" title="Skip to content">Skip to content</a>
+					<div class="nav-menu"><ul><li class="page_item page-item-302"><a href="../../index.html@p=302.html">About</a></li></ul></div>
+					<form role="search" method="get" class="search-form" action="../../index.html">
+				<label>
+					<span class="screen-reader-text">Search for:</span>
+					<input type="search" class="search-field" placeholder="Search &hellip;" value="" name="s" title="Search for:" />
+				</label>
+				<input type="submit" class="search-submit" value="Search" />
+			</form>				</nav><!-- #site-navigation -->
+			</div><!-- #navbar -->
+		</header><!-- #masthead -->
+
+		<div id="main" class="site-main">
+
+	<div id="primary" class="content-area">
+		<div id="content" class="site-content" role="main">
+
+					<header class="archive-header">
+				<h1 class="archive-title">Tag Archives: C#</h1>
+
+							</header><!-- .archive-header -->
+
+										
+<article id="post-292" class="post-292 post type-post status-publish format-standard hentry category-work category-link tag-net tag-c tag-utility">
+	<header class="entry-header">
+		
+				<h1 class="entry-title">
+			<a href="../../index.html@p=292.html" rel="bookmark">Mini C# Lab</a>
+		</h1>
+		
+		<div class="entry-meta">
+			<span class="date"><a href="../../index.html@p=292.html" title="Permalink to Mini C# Lab" rel="bookmark"><time class="entry-date" datetime="2008-07-11T07:56:45+00:00">July 11, 2008</time></a></span><span class="categories-links"><a href="../../category/english/work/index.html" rel="category tag">Geek</a>, <a href="../../category/english/link/index.html" rel="category tag">Link</a></span><span class="tags-links"><a href="../net/index.html" rel="tag">.net</a>, <a href="index.html" rel="tag">C#</a>, <a href="../utility/index.html" rel="tag">utility</a></span><span class="author vcard"><a class="url fn n" href="../../author/noocyte/index.html" title="View all posts by noocyte" rel="author">noocyte</a></span>					</div><!-- .entry-meta -->
+	</header><!-- .entry-header -->
+
+		<div class="entry-content">
+		<p><a href="http://www.codeplex.com/minicsharplab">Mini C# Lab &#8211; Home</a></p>
+<blockquote><p>A handy tool for simple short C# code running and testing, you can save time on waiting for Visual Studio startup and avoid creating a lot of one-time only project files. </p></blockquote>
+<p>Cool, I very often have to create small samples just to test some ideas or validate some code that I&#8217;m using. This should come in handy.</p>
+	</div><!-- .entry-content -->
+	
+	<footer class="entry-meta">
+					<div class="comments-link">
+				<a href="../../index.html@p=292.html#comments">One comment so far</a>			</div><!-- .comments-link -->
+		
+			</footer><!-- .entry-meta -->
+</article><!-- #post -->
+							
+<article id="post-274" class="post-274 post type-post status-publish format-standard hentry category-link tag-net tag-c">
+	<header class="entry-header">
+		
+				<h1 class="entry-title">
+			<a href="../../index.html@p=274.html" rel="bookmark">Back to Basics &#8211; This is not the object you&#8217;re looking&#8230;wait, oh, it is the object</a>
+		</h1>
+		
+		<div class="entry-meta">
+			<span class="date"><a href="../../index.html@p=274.html" title="Permalink to Back to Basics &#8211; This is not the object you&#8217;re looking&#8230;wait, oh, it is the object" rel="bookmark"><time class="entry-date" datetime="2008-07-02T09:19:19+00:00">July 2, 2008</time></a></span><span class="categories-links"><a href="../../category/english/link/index.html" rel="category tag">Link</a></span><span class="tags-links"><a href="../net/index.html" rel="tag">.net</a>, <a href="index.html" rel="tag">C#</a></span><span class="author vcard"><a class="url fn n" href="../../author/noocyte/index.html" title="View all posts by noocyte" rel="author">noocyte</a></span>					</div><!-- .entry-meta -->
+	</header><!-- .entry-header -->
+
+		<div class="entry-content">
+		<p><a href="http://www.hanselman.com/blog/BackToBasicsThisIsNotTheObjectYoureLookingwaitOhItIsTheObject.aspx">Scott Hanselman&#8217;s Computer Zen &#8211; Back to Basics &#8211; This is not the object you&#8217;re looking&#8230;wait, oh, it is the object</a><br />
+<blockquote>Know your options, but above all, know your intentions and make sure that the code you&#8217;re writing correctly expresses your intent.</p>
+<div align="left"></div>
+</blockquote>
+	</div><!-- .entry-content -->
+	
+	<footer class="entry-meta">
+					<div class="comments-link">
+				<a href="../../index.html@p=274.html#respond"><span class="leave-reply">Leave a comment</span></a>			</div><!-- .comments-link -->
+		
+			</footer><!-- .entry-meta -->
+</article><!-- #post -->
+							
+<article id="post-230" class="post-230 post type-post status-publish format-standard hentry category-link tag-c tag-linq tag-reg-exp">
+	<header class="entry-header">
+		
+				<h1 class="entry-title">
+			<a href="../../index.html@p=230.html" rel="bookmark">Linq and RegExp</a>
+		</h1>
+		
+		<div class="entry-meta">
+			<span class="date"><a href="../../index.html@p=230.html" title="Permalink to Linq and RegExp" rel="bookmark"><time class="entry-date" datetime="2008-05-13T10:04:35+00:00">May 13, 2008</time></a></span><span class="categories-links"><a href="../../category/english/link/index.html" rel="category tag">Link</a></span><span class="tags-links"><a href="index.html" rel="tag">C#</a>, <a href="../linq/index.html" rel="tag">linq</a>, <a href="../reg-exp/index.html" rel="tag">reg exp</a></span><span class="author vcard"><a class="url fn n" href="../../author/noocyte/index.html" title="View all posts by noocyte" rel="author">noocyte</a></span>					</div><!-- .entry-meta -->
+	</header><!-- .entry-header -->
+
+		<div class="entry-content">
+		<p>I&#8217;ve always struggeled with RegExp. Every time I need one I have to use a tool and then carefully create it. Painful. But today I discovered a new project: <a href="http://flimflan.com/blog/ReadableRegularExpressions.aspx">Readable Regular Expressions</a>. I basically uses Linq syntax to create the regexp for you! Pretty cool!</p>
+	</div><!-- .entry-content -->
+	
+	<footer class="entry-meta">
+					<div class="comments-link">
+				<a href="../../index.html@p=230.html#respond"><span class="leave-reply">Leave a comment</span></a>			</div><!-- .comments-link -->
+		
+			</footer><!-- .entry-meta -->
+</article><!-- #post -->
+							
+<article id="post-227" class="post-227 post type-post status-publish format-standard hentry category-link tag-net tag-c">
+	<header class="entry-header">
+		
+				<h1 class="entry-title">
+			<a href="../../index.html@p=227.html" rel="bookmark">Designing With Lambdas &#8211; Part I &#8211; Sergio Pereira</a>
+		</h1>
+		
+		<div class="entry-meta">
+			<span class="date"><a href="../../index.html@p=227.html" title="Permalink to Designing With Lambdas &#8211; Part I &#8211; Sergio Pereira" rel="bookmark"><time class="entry-date" datetime="2008-04-21T15:46:45+00:00">April 21, 2008</time></a></span><span class="categories-links"><a href="../../category/english/link/index.html" rel="category tag">Link</a></span><span class="tags-links"><a href="../net/index.html" rel="tag">.net</a>, <a href="index.html" rel="tag">C#</a></span><span class="author vcard"><a class="url fn n" href="../../author/noocyte/index.html" title="View all posts by noocyte" rel="author">noocyte</a></span>					</div><!-- .entry-meta -->
+	</header><!-- .entry-header -->
+
+		<div class="entry-content">
+		<p>Pretty cool use of Lambdas. Passing functions around is really handy! <img src="../../wp-includes/images/smilies/simple-smile.png" alt=":)" class="wp-smiley" style="height: 1em; max-height: 1em;" /> </p>
+<p><a href="http://devlicio.us/blogs/sergio_pereira/archive/2008/04/12/designing-with-lambdas-part-i.aspx">Designing With Lambdas &#8211; Part I &#8211; Sergio Pereira</a></p>
+	</div><!-- .entry-content -->
+	
+	<footer class="entry-meta">
+					<div class="comments-link">
+				<a href="../../index.html@p=227.html#respond"><span class="leave-reply">Leave a comment</span></a>			</div><!-- .comments-link -->
+		
+			</footer><!-- .entry-meta -->
+</article><!-- #post -->
+							
+<article id="post-193" class="post-193 post type-post status-publish format-standard hentry category-work category-link tag-c tag-linq">
+	<header class="entry-header">
+		
+				<h1 class="entry-title">
+			<a href="../../index.html@p=193.html" rel="bookmark">Charlie Calvert&#8217;s Community Blog : Video of Luke Hoban&#8217;s In-Depth Look at C# 3.0</a>
+		</h1>
+		
+		<div class="entry-meta">
+			<span class="date"><a href="../../index.html@p=193.html" title="Permalink to Charlie Calvert&#8217;s Community Blog : Video of Luke Hoban&#8217;s In-Depth Look at C# 3.0" rel="bookmark"><time class="entry-date" datetime="2008-03-03T09:37:30+00:00">March 3, 2008</time></a></span><span class="categories-links"><a href="../../category/english/work/index.html" rel="category tag">Geek</a>, <a href="../../category/english/link/index.html" rel="category tag">Link</a></span><span class="tags-links"><a href="index.html" rel="tag">C#</a>, <a href="../linq/index.html" rel="tag">linq</a></span><span class="author vcard"><a class="url fn n" href="../../author/noocyte/index.html" title="View all posts by noocyte" rel="author">noocyte</a></span>					</div><!-- .entry-meta -->
+	</header><!-- .entry-header -->
+
+		<div class="entry-content">
+		<p>More of a bookmark than anything; I really wanna watch these two presentations asap. </p>
+<p><a href="http://blogs.msdn.com/charlie/archive/2008/02/22/video-of-luke-hoban-in-depth-look-at-c-3-0.aspx">Charlie Calvert&#8217;s Community Blog : Video of Luke Hoban&#8217;s In-Depth Look at C# 3.0</a></p>
+	</div><!-- .entry-content -->
+	
+	<footer class="entry-meta">
+					<div class="comments-link">
+				<a href="../../index.html@p=193.html#respond"><span class="leave-reply">Leave a comment</span></a>			</div><!-- .comments-link -->
+		
+			</footer><!-- .entry-meta -->
+</article><!-- #post -->
+							
+<article id="post-167" class="post-167 post type-post status-publish format-standard hentry category-personal tag-c tag-code">
+	<header class="entry-header">
+		
+				<h1 class="entry-title">
+			<a href="../../index.html@p=167.html" rel="bookmark">Double Key Dictionary</a>
+		</h1>
+		
+		<div class="entry-meta">
+			<span class="date"><a href="../../index.html@p=167.html" title="Permalink to Double Key Dictionary" rel="bookmark"><time class="entry-date" datetime="2008-02-18T23:16:39+00:00">February 18, 2008</time></a></span><span class="categories-links"><a href="../../category/english/personal/index.html" rel="category tag">Personal</a></span><span class="tags-links"><a href="index.html" rel="tag">C#</a>, <a href="../code/index.html" rel="tag">code</a></span><span class="author vcard"><a class="url fn n" href="../../author/noocyte/index.html" title="View all posts by noocyte" rel="author">noocyte</a></span>					</div><!-- .entry-meta -->
+	</header><!-- .entry-header -->
+
+		<div class="entry-content">
+		<p>Double Key Dictionary, or; how to make it really simple to use a dictionary with two keys.</p>
+<p>In a matter of just weeks I found myself forced to temporarily store values with two unique identifying keys. As an example think about a customer in a web shop who has bought some books. Key number one would be the customer ID and then key number two would be the books ISBN number. The value stored could be the books name. Why you would want to do this I have no idea, but it&#8217;s an easy to understand example and it illustrates the problem I had so that everybody can understand it. Its just that I read values from, literally, thousands of Xml logs stored in a database&#8230; Anyway!</p>
+<p>So what you could do is something like this:</p>
+<p><font color="#0000ff" size="2" face="Consolas">Dictionary&lt;string, Dictionary&lt;string, string&gt;&gt; bookList = new Dictionary&lt;string, Dictionary&lt;string, string&gt;&gt;();<br />Dictionary&lt;string, string&gt; innerList = new&#8230;<br />innerList.Add(&#8220;11-22-33&#8243;, &#8220;Lord of the Rings&#8221;);<br />bookList.Add(&#8220;James&#8221;, innerList);</font></p>
+<p>That works and would perhaps be good enough. But what happens if you want to compare two lists of books? And it&#8217;s not unthinkable that you might end up trying to add the same book, for the same person, more than once. How do you handle that? Lots of manual checks? More on my solution later on&#8230;</p>
+<p>Even if I could make the problems outlined above go away (as in create little helper methods to sort them out) I just didn&#8217;t like the syntax. It felt just so wrong. What I wanted would be something like this:</p>
+<p><font color="#0000ff" size="2" face="Consolas">DoubleKeyDictionary&lt;string, string, string&gt; bookListEx = new DoubleKeyDictionary&lt;string, string, string&gt;();<br />bookListEx.Add(&#8220;James&#8221;, &#8220;11-22-33&#8243;, &#8220;Lord of &#8230;&#8221;);</font></p>
+<p>(Abbreviated for clarity)</p>
+<p>So I implemented the DoubleKeyDictionary, as a two key generic dictionary. My implementation also includes IEnumerable&lt;T&gt;, IEquatable&lt;T&gt; and I added an index. All this enables me to use this syntax:</p>
+<p><font color="#0000ff" size="2" face="Consolas">DoubleKeyDictionary&lt;string, string, string&gt; bookListEx = new DoubleKeyDictionary&lt;string, string, string&gt;();<br />bookListEx.Add(&#8220;James&#8221;, &#8220;11-22-33&#8243;, &#8220;Lord of the Rings&#8221;); </font></p>
+<p><font color="#0000ff" size="2" face="Consolas">DoubleKeyDictionary&lt;string, string, string&gt; bookList = new DoubleKeyDictionary&lt;string, string, string&gt;();<br />bookList.Add(&#8220;James&#8221;, &#8220;10-20-30&#8243;, &#8220;Narnia&#8221;); </font></p>
+<p><font color="#0000ff" size="2" face="Consolas">if (bookList.Equals(bookListEx))<br />&nbsp;&nbsp;&nbsp; Console.WriteLine(&#8220;They are equal&#8221;); </font></p>
+<p><font color="#0000ff" size="2" face="Consolas">foreach (DoubleKeyPairValue&lt;string, string, string&gt; books in bookListEx)<br />&nbsp;&nbsp;&nbsp; Console.WriteLine(books.ToString());</font></p>
+<p>Sorry about the bad formatting. <strike>Please </strike><a href="http://cid-3a746453fc8ad1ba.skydrive.live.com/self.aspx/Offentlig/DoubleKeyDictionary.cs" target="_blank"><strike>download the actual code file</strike></a><strike> [new window].</strike> Please feel free to use the code if you like it. If not; tell me why!</p>
+<p>12th of November edit: Code has finally been <a href="https://github.com/noocyte/Util.DoubleKeyDictionary">moved to Github</a>! Please contribute!</p>
+	</div><!-- .entry-content -->
+	
+	<footer class="entry-meta">
+					<div class="comments-link">
+				<a href="../../index.html@p=167.html#comments">View all 18 comments</a>			</div><!-- .comments-link -->
+		
+			</footer><!-- .entry-meta -->
+</article><!-- #post -->
+							
+<article id="post-145" class="post-145 post type-post status-publish format-standard hentry category-work category-link tag-net tag-c">
+	<header class="entry-header">
+		
+				<h1 class="entry-title">
+			<a href="../../index.html@p=145.html" rel="bookmark">Joshua Flanagan &#8211; The power of yield (return)</a>
+		</h1>
+		
+		<div class="entry-meta">
+			<span class="date"><a href="../../index.html@p=145.html" title="Permalink to Joshua Flanagan &#8211; The power of yield (return)" rel="bookmark"><time class="entry-date" datetime="2008-02-07T11:39:57+00:00">February 7, 2008</time></a></span><span class="categories-links"><a href="../../category/english/work/index.html" rel="category tag">Geek</a>, <a href="../../category/english/link/index.html" rel="category tag">Link</a></span><span class="tags-links"><a href="../net/index.html" rel="tag">.net</a>, <a href="index.html" rel="tag">C#</a></span><span class="author vcard"><a class="url fn n" href="../../author/noocyte/index.html" title="View all posts by noocyte" rel="author">noocyte</a></span>					</div><!-- .entry-meta -->
+	</header><!-- .entry-header -->
+
+		<div class="entry-content">
+		<p>yield is pretty cool and this was a simple and good example of how to use it and why you would want to.&nbsp;</p>
+<p><a href="http://flimflan.com/blog/ThePowerOfYieldReturn.aspx">Link to Joshua Flanagan &#8211; The power of yield (return)</a></p>
+	</div><!-- .entry-content -->
+	
+	<footer class="entry-meta">
+					<div class="comments-link">
+				<a href="../../index.html@p=145.html#respond"><span class="leave-reply">Leave a comment</span></a>			</div><!-- .comments-link -->
+		
+			</footer><!-- .entry-meta -->
+</article><!-- #post -->
+							
+<article id="post-27" class="post-27 post type-post status-publish format-standard hentry category-link tag-net tag-c">
+	<header class="entry-header">
+		
+				<h1 class="entry-title">
+			<a href="../../index.html@p=27.html" rel="bookmark">C# 4.0 Feature Request: &#8220;??=&#8221; the Lazy load operator&#8230; &#8211; The Bolla Blog</a>
+		</h1>
+		
+		<div class="entry-meta">
+			<span class="date"><a href="../../index.html@p=27.html" title="Permalink to C# 4.0 Feature Request: &#8220;??=&#8221; the Lazy load operator&#8230; &#8211; The Bolla Blog" rel="bookmark"><time class="entry-date" datetime="2007-10-29T15:01:16+00:00">October 29, 2007</time></a></span><span class="categories-links"><a href="../../category/english/link/index.html" rel="category tag">Link</a></span><span class="tags-links"><a href="../net/index.html" rel="tag">.net</a>, <a href="index.html" rel="tag">C#</a></span><span class="author vcard"><a class="url fn n" href="../../author/noocyte/index.html" title="View all posts by noocyte" rel="author">noocyte</a></span>					</div><!-- .entry-meta -->
+	</header><!-- .entry-header -->
+
+		<div class="entry-content">
+		<p>Not&nbsp;bad&#8230; I can see lots of uses for such an operator. However I do fear that we&#8217;re soon approaching &#8220;feature bloat&#8221; in C#&#8230; I worry alot about that actually&#8230;&nbsp;</p>
+<p><a href="http://devlicio.us/blogs/jim_bolla/archive/2007/10/26/c-4-0-feature-request-quot-quot-the-lazy-load-operator.aspx">Link to C# 4.0 Feature Request: &#8220;??=&#8221; the Lazy load operator&#8230; &#8211; The Bolla Blog</a></p>
+	</div><!-- .entry-content -->
+	
+	<footer class="entry-meta">
+					<div class="comments-link">
+				<a href="../../index.html@p=27.html#respond"><span class="leave-reply">Leave a comment</span></a>			</div><!-- .comments-link -->
+		
+			</footer><!-- .entry-meta -->
+</article><!-- #post -->
+							
+<article id="post-12" class="post-12 post type-post status-publish format-standard hentry category-link tag-net tag-c tag-wcf">
+	<header class="entry-header">
+		
+				<h1 class="entry-title">
+			<a href="../../index.html@p=12.html" rel="bookmark">J.D. Meier&#8217;s Blog : How To: Create a “Hello World” WCF Service Using Visual Studio</a>
+		</h1>
+		
+		<div class="entry-meta">
+			<span class="date"><a href="../../index.html@p=12.html" title="Permalink to J.D. Meier&#8217;s Blog : How To: Create a “Hello World” WCF Service Using Visual Studio" rel="bookmark"><time class="entry-date" datetime="2007-10-16T07:06:00+00:00">October 16, 2007</time></a></span><span class="categories-links"><a href="../../category/english/link/index.html" rel="category tag">Link</a></span><span class="tags-links"><a href="../net/index.html" rel="tag">.net</a>, <a href="index.html" rel="tag">C#</a>, <a href="../wcf/index.html" rel="tag">wcf</a></span><span class="author vcard"><a class="url fn n" href="../../author/noocyte/index.html" title="View all posts by noocyte" rel="author">noocyte</a></span>					</div><!-- .entry-meta -->
+	</header><!-- .entry-header -->
+
+		<div class="entry-content">
+		<p>&nbsp;</p>
+<p><a href="http://blogs.msdn.com/jmeier/archive/2007/10/15/how-to-create-a-hello-world-wcf-service-using-visual-studio.aspx">Link to J.D. Meier&#8217;s Blog : How To: Create a “Hello World” WCF Service Using Visual Studio</a></p>
+	</div><!-- .entry-content -->
+	
+	<footer class="entry-meta">
+					<div class="comments-link">
+				<a href="../../index.html@p=12.html#respond"><span class="leave-reply">Leave a comment</span></a>			</div><!-- .comments-link -->
+		
+			</footer><!-- .entry-meta -->
+</article><!-- #post -->
+							
+<article id="post-11" class="post-11 post type-post status-publish format-standard hentry category-link tag-net tag-c tag-linq">
+	<header class="entry-header">
+		
+				<h1 class="entry-title">
+			<a href="../../index.html@p=11.html" rel="bookmark">PaulStovell.NET » Introducing SyncLINQ</a>
+		</h1>
+		
+		<div class="entry-meta">
+			<span class="date"><a href="../../index.html@p=11.html" title="Permalink to PaulStovell.NET » Introducing SyncLINQ" rel="bookmark"><time class="entry-date" datetime="2007-10-16T06:57:27+00:00">October 16, 2007</time></a></span><span class="categories-links"><a href="../../category/english/link/index.html" rel="category tag">Link</a></span><span class="tags-links"><a href="../net/index.html" rel="tag">.net</a>, <a href="index.html" rel="tag">C#</a>, <a href="../linq/index.html" rel="tag">linq</a></span><span class="author vcard"><a class="url fn n" href="../../author/noocyte/index.html" title="View all posts by noocyte" rel="author">noocyte</a></span>					</div><!-- .entry-meta -->
+	</header><!-- .entry-header -->
+
+		<div class="entry-content">
+		<p>&nbsp;</p>
+<p><a href="http://www.paulstovell.net/blog/index.php/introducing-synclinq/">Link to PaulStovell.NET » Introducing SyncLINQ</a></p>
+	</div><!-- .entry-content -->
+	
+	<footer class="entry-meta">
+					<div class="comments-link">
+				<a href="../../index.html@p=11.html#respond"><span class="leave-reply">Leave a comment</span></a>			</div><!-- .comments-link -->
+		
+			</footer><!-- .entry-meta -->
+</article><!-- #post -->
+			
+			
+		
+		</div><!-- #content -->
+	</div><!-- #primary -->
+
+
+		</div><!-- #main -->
+		<footer id="colophon" class="site-footer" role="contentinfo">
+				<div id="secondary" class="sidebar-container" role="complementary">
+		<div class="widget-area">
+			<aside id="search-2" class="widget widget_search"><form role="search" method="get" class="search-form" action="../../index.html">
+				<label>
+					<span class="screen-reader-text">Search for:</span>
+					<input type="search" class="search-field" placeholder="Search &hellip;" value="" name="s" title="Search for:" />
+				</label>
+				<input type="submit" class="search-submit" value="Search" />
+			</form></aside>		<aside id="recent-posts-2" class="widget widget_recent_entries">		<h3 class="widget-title">Recent Posts</h3>		<ul>
+					<li>
+				<a href="../../index.html@p=1672.html">Contributing to open source, part II</a>
+						</li>
+					<li>
+				<a href="../../index.html@p=1602.html">Ninject and Factory Injection</a>
+						</li>
+					<li>
+				<a href="../../index.html@p=1562.html">Contributing to open source, part I</a>
+						</li>
+					<li>
+				<a href="../../index.html@p=1342.html">Transient Fault Handling Application Block</a>
+						</li>
+					<li>
+				<a href="../../index.html@p=1252.html">Azure Workers</a>
+						</li>
+				</ul>
+		</aside><aside id="recent-comments-2" class="widget widget_recent_comments"><h3 class="widget-title">Recent Comments</h3><ul id="recentcomments"><li class="recentcomments"><span class="comment-author-link"><a href='../../index.html@p=1672.html' rel='external nofollow' class='url'>Contributing to open source, part II | Home of noocyte</a></span> on <a href="../../index.html@p=1252.html#comment-75">Azure Workers</a></li><li class="recentcomments"><span class="comment-author-link"><a href='../../index.html@p=1672.html' rel='external nofollow' class='url'>Contributing to open source, part II | Home of noocyte</a></span> on <a href="../../index.html@p=1562.html#comment-76">Contributing to open source, part I</a></li><li class="recentcomments"><span class="comment-author-link"><a href='../../2012/11/my-first-adventures-in-git/index.html' rel='external nofollow' class='url'>My first adventures in Git | Home of noocyte</a></span> on <a href="../../index.html@p=167.html#comment-52">Double Key Dictionary</a></li><li class="recentcomments"><span class="comment-author-link"><a href='http://www.kcrunforlife.com/blog/2011/03/08/tune-in-to-see-Brad-Prestons-blog.aspx' rel='external nofollow' class='url'>new android apps</a></span> on <a href="../../index.html@p=167.html#comment-51">Double Key Dictionary</a></li><li class="recentcomments"><span class="comment-author-link"><a href='http://clickherenow' rel='external nofollow' class='url'>Lissa Lloyd</a></span> on <a href="../../index.html@p=167.html#comment-50">Double Key Dictionary</a></li></ul></aside><aside id="archives-2" class="widget widget_archive"><h3 class="widget-title">Archives</h3>		<ul>
+	<li><a href='../../2014/03/index.html'>March 2014</a></li>
+	<li><a href='../../2014/02/index.html'>February 2014</a></li>
+	<li><a href='../../2013/11/index.html'>November 2013</a></li>
+	<li><a href='../../2013/01/index.html'>January 2013</a></li>
+	<li><a href='../../2012/11/index.html'>November 2012</a></li>
+	<li><a href='../../2012/10/index.html'>October 2012</a></li>
+	<li><a href='../../2012/09/index.html'>September 2012</a></li>
+	<li><a href='../../2012/08/index.html'>August 2012</a></li>
+	<li><a href='../../2011/11/index.html'>November 2011</a></li>
+	<li><a href='../../2011/10/index.html'>October 2011</a></li>
+	<li><a href='../../2011/09/index.html'>September 2011</a></li>
+	<li><a href='../../2009/10/index.html'>October 2009</a></li>
+	<li><a href='../../2009/08/index.html'>August 2009</a></li>
+	<li><a href='../../2008/11/index.html'>November 2008</a></li>
+	<li><a href='../../2008/10/index.html'>October 2008</a></li>
+	<li><a href='../../2008/09/index.html'>September 2008</a></li>
+	<li><a href='../../2008/08/index.html'>August 2008</a></li>
+	<li><a href='../../2008/07/index.html'>July 2008</a></li>
+	<li><a href='../../2008/06/index.html'>June 2008</a></li>
+	<li><a href='../../2008/05/index.html'>May 2008</a></li>
+	<li><a href='../../2008/04/index.html'>April 2008</a></li>
+	<li><a href='../../2008/03/index.html'>March 2008</a></li>
+	<li><a href='../../2008/02/index.html'>February 2008</a></li>
+	<li><a href='../../2008/01/index.html'>January 2008</a></li>
+	<li><a href='../../2007/12/index.html'>December 2007</a></li>
+	<li><a href='../../2007/11/index.html'>November 2007</a></li>
+	<li><a href='../../2007/10/index.html'>October 2007</a></li>
+		</ul>
+</aside><aside id="categories-2" class="widget widget_categories"><h3 class="widget-title">Categories</h3>		<ul>
+	<li class="cat-item cat-item-3"><a href="../../category/english/work/index.html" >Geek</a>
+</li>
+	<li class="cat-item cat-item-4"><a href="../../category/english/link/index.html" >Link</a>
+</li>
+	<li class="cat-item cat-item-6"><a href="../../category/english/personal/index.html" >Personal</a>
+</li>
+	<li class="cat-item cat-item-7"><a href="../../category/uxrisk/index.html" >uxrisk</a>
+</li>
+		</ul>
+</aside><aside id="meta-2" class="widget widget_meta"><h3 class="widget-title">Meta</h3>			<ul>
+						<li><a href="../../wp-login.php.html">Log in</a></li>
+			<li><a href="../../feed/index.html">Entries <abbr title="Really Simple Syndication">RSS</abbr></a></li>
+			<li><a href="../../comments/feed/index.html">Comments <abbr title="Really Simple Syndication">RSS</abbr></a></li>
+<li><a href="https://wordpress.org/" title="Powered by WordPress, state-of-the-art semantic personal publishing platform.">WordPress.org</a></li>			</ul>
+</aside>		</div><!-- .widget-area -->
+	</div><!-- #secondary -->
+
+			<div class="site-info">
+								<a href="http://wordpress.org/" title="Semantic Personal Publishing Platform">Proudly powered by WordPress</a>
+			</div><!-- .site-info -->
+		</footer><!-- #colophon -->
+	</div><!-- #page -->
+
+	<script type='text/javascript' src='../../wp-includes/js/masonry.min.js@ver=3.1.2'></script>
+<script type='text/javascript' src='../../wp-includes/js/jquery/jquery.masonry.min.js@ver=3.1.2'></script>
+<script type='text/javascript' src='../../wp-content/themes/twentythirteen/js/functions.js@ver=2014-06-08'></script>
+</body>
+</html>

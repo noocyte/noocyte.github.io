@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Home of noocyte &#187; database</title>
+	<atom:link href="http://blog.noocyte.net/tag/database/feed/" rel="self" type="application/rss+xml" />
+	<link>http://blog.noocyte.net</link>
+	<description>Ramblings of a mad mind</description>
+	<lastBuildDate>Fri, 04 Apr 2014 13:39:58 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>Crazy Talk: Reducing ORM Friction : Rob Conery</title>
+		<link>http://blog.noocyte.net/2008/11/05/crazy-talk-reducing-orm-friction-rob-conery/</link>
+		<comments>http://blog.noocyte.net/2008/11/05/crazy-talk-reducing-orm-friction-rob-conery/#comments</comments>
+		<pubDate>Wed, 05 Nov 2008 13:23:42 +0000</pubDate>
+		<dc:creator><![CDATA[noocyte]]></dc:creator>
+				<category><![CDATA[Link]]></category>
+		<category><![CDATA[database]]></category>
+		<category><![CDATA[db4o]]></category>
+		<category><![CDATA[object orientation]]></category>
+		<category><![CDATA[tdd]]></category>
+
+		<guid isPermaLink="false">http://noocyte.wordpress.com/2008/11/05/crazy-talk-reducing-orm-friction-rob-conery/</guid>
+		<description><![CDATA[So Rob Conery wrote a really cool post the other day that I just had to comment on. Here&#8217;s my thought for you: What if you used an OODB for development ONLY and implemented SQL Server later, when you know what you need to create. It made me wonder; how many applications really, really need &#8230; <a href="http://blog.noocyte.net/2008/11/05/crazy-talk-reducing-orm-friction-rob-conery/" class="more-link">Continue reading <span class="screen-reader-text">Crazy Talk: Reducing ORM Friction : Rob Conery</span> <span class="meta-nav">&#8594;</span></a>]]></description>
+				<content:encoded><![CDATA[<p>So Rob Conery wrote a really <a href="http://blog.wekeroad.com/blog/crazy-talk-reducing-orm-friction/">cool post</a> the other day that I just had to comment on.</p>
+<blockquote><p>Here&#8217;s my thought for you: What if you used an OODB for development ONLY and implemented SQL Server later, when you know what you need to create.</p>
+</blockquote>
+<p><font color="#777777">It made me wonder; how many applications really, really need a full on RDBMS (Oracle, Sql Server etc.) as backend? I wouldn’t know, but if I were to guess I’d say; not all. Vague, I know… <img src="http://s.w.org/images/core/emoji/72x72/1f609.png" alt="😉" class="wp-smiley" style="height: 1em; max-height: 1em;" /> But I do know this; my next project will use <a href="http://www.db4o.com/?src=comm">Db4O</a>! I just have to try this stuff out! <img src="http://blog.noocyte.net/wp-includes/images/smilies/simple-smile.png" alt=":)" class="wp-smiley" style="height: 1em; max-height: 1em;" /></font></p>
+<p><a href="http://blog.wekeroad.com/blog/crazy-talk-reducing-orm-friction/">Crazy Talk: Reducing ORM Friction : Rob Conery</a></p>
+]]></content:encoded>
+			<wfw:commentRss>http://blog.noocyte.net/2008/11/05/crazy-talk-reducing-orm-friction-rob-conery/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>PaulStovell.NET » The Inline SQL application &#8211; Six Months Later</title>
+		<link>http://blog.noocyte.net/2008/02/28/paulstovellnet-the-inline-sql-application-six-months-later/</link>
+		<comments>http://blog.noocyte.net/2008/02/28/paulstovellnet-the-inline-sql-application-six-months-later/#comments</comments>
+		<pubDate>Thu, 28 Feb 2008 08:07:57 +0000</pubDate>
+		<dc:creator><![CDATA[noocyte]]></dc:creator>
+				<category><![CDATA[Geek]]></category>
+		<category><![CDATA[Link]]></category>
+		<category><![CDATA[dal]]></category>
+		<category><![CDATA[database]]></category>
+		<category><![CDATA[sql]]></category>
+
+		<guid isPermaLink="false">http://noocyte.wordpress.com/2008/02/28/paulstovellnet-the-inline-sql-application-six-months-later/</guid>
+		<description><![CDATA[In my opinion (IMO) there is only one proper way to hide database/implementation specific stuff; Use a Data Access Layer (DAL). Whatever lies behind that can be as ugly-bugly as you want to, as long as it returns data according to a set of defined rules. I generally like the &#8220;EntityDataManager&#8221; naming convention; CustomerDataManager and &#8230; <a href="http://blog.noocyte.net/2008/02/28/paulstovellnet-the-inline-sql-application-six-months-later/" class="more-link">Continue reading <span class="screen-reader-text">PaulStovell.NET » The Inline SQL application &#8211; Six Months Later</span> <span class="meta-nav">&#8594;</span></a>]]></description>
+				<content:encoded><![CDATA[<p>In my opinion (IMO) there is only one proper way to hide database/implementation specific stuff; Use a Data Access Layer (DAL). Whatever lies behind that can be as ugly-bugly as you want to, as long as it returns data according to a set of defined rules. I generally like the &#8220;EntityDataManager&#8221; naming convention; CustomerDataManager and OrderDataManager. Or use Agent instead of manager, it sounds cooler. We actually have a UIAgent class responsible for converting/formatting data depending on the clients UI. </p>
+<p>SPs or Inline? If you have a very complicated, and perhaps old, database SPs might make more sense. Just to hide the worst of the database stuff from the DAL. But you can do alot with views too&#8230;</p>
+<p><a href="http://www.paulstovell.net/blog/index.php/the-inline-sql-application-six-months-later/">PaulStovell.NET » The Inline SQL application &#8211; Six Months Later</a></p>
+]]></content:encoded>
+			<wfw:commentRss>http://blog.noocyte.net/2008/02/28/paulstovellnet-the-inline-sql-application-six-months-later/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>CoDe Magazine &#8211; Article: The Data Dude Meets Team Build</title>
+		<link>http://blog.noocyte.net/2007/11/09/code-magazine-article-the-data-dude-meets-team-build/</link>
+		<comments>http://blog.noocyte.net/2007/11/09/code-magazine-article-the-data-dude-meets-team-build/#comments</comments>
+		<pubDate>Fri, 09 Nov 2007 08:24:03 +0000</pubDate>
+		<dc:creator><![CDATA[noocyte]]></dc:creator>
+				<category><![CDATA[Geek]]></category>
+		<category><![CDATA[Link]]></category>
+		<category><![CDATA[database]]></category>
+		<category><![CDATA[tfs]]></category>
+		<category><![CDATA[vsts]]></category>
+		<category><![CDATA[vstsdbpro]]></category>
+
+		<guid isPermaLink="false">http://noocyte.wordpress.com/2007/11/09/code-magazine-article-the-data-dude-meets-team-build/</guid>
+		<description><![CDATA[Data, dude! Looking forward to the day Microsoft implements Oracle support in Data Dude, so we can use it to. Or, even better, we drop Oracle support all together!&#160;&#160; Link to CoDe Magazine &#8211; Article: The Data Dude Meets Team Build]]></description>
+				<content:encoded><![CDATA[<p>Data, dude! <img src="http://blog.noocyte.net/wp-includes/images/smilies/simple-smile.png" alt=":)" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+<p>Looking forward to the day Microsoft implements Oracle support in Data Dude, so we can use it to. Or, even better, we drop Oracle support all together!&nbsp;&nbsp;</p>
+<p><a href="http://www.code-magazine.com/Article.aspx?quickid=990712152">Link to CoDe Magazine &#8211; Article: The Data Dude Meets Team Build</a></p>
+]]></content:encoded>
+			<wfw:commentRss>http://blog.noocyte.net/2007/11/09/code-magazine-article-the-data-dude-meets-team-build/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+	</channel>
+</rss>

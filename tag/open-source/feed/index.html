@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Home of noocyte &#187; open source</title>
+	<atom:link href="http://blog.noocyte.net/tag/open-source/feed/" rel="self" type="application/rss+xml" />
+	<link>http://blog.noocyte.net</link>
+	<description>Ramblings of a mad mind</description>
+	<lastBuildDate>Fri, 04 Apr 2014 13:39:58 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>Contributing to open source, part II</title>
+		<link>http://blog.noocyte.net/2014/03/31/contributing-to-open-source-part-ii/</link>
+		<comments>http://blog.noocyte.net/2014/03/31/contributing-to-open-source-part-ii/#comments</comments>
+		<pubDate>Mon, 31 Mar 2014 08:41:43 +0000</pubDate>
+		<dc:creator><![CDATA[noocyte]]></dc:creator>
+				<category><![CDATA[Geek]]></category>
+		<category><![CDATA[uxrisk]]></category>
+		<category><![CDATA[open source]]></category>
+
+		<guid isPermaLink="false">http://blog.noocyte.net/?p=1672</guid>
+		<description><![CDATA[In my previous post I detailed what open source projects we have contributed code to, but this post will highlight what projects we have made publicly available. We host all our open source projects from GitHub, feel free to browse our repositories. I would like to highlight just one project in this post, the AzureWorkers. &#8230; <a href="http://blog.noocyte.net/2014/03/31/contributing-to-open-source-part-ii/" class="more-link">Continue reading <span class="screen-reader-text">Contributing to open source, part II</span> <span class="meta-nav">&#8594;</span></a>]]></description>
+				<content:encoded><![CDATA[<p>In my <a title="Contributing to open source" href="http://blog.noocyte.net/2014/03/27/contributing-to-open-source/">previous post</a> I detailed what open source projects we have contributed code to, but this post will highlight what projects we have made publicly available.</p>
+<p>We host all our open source projects from GitHub, feel free to <a href="https://github.com/orgs/proactima/">browse our repositories</a>. I would like to highlight just one project in this post, the <a href="https://github.com/proactima/AzureWorkers">AzureWorkers</a>.</p>
+<p>AzureWorkers is a project we started back in August to create a framework for running multiple worker threads within one single Azure Worker Role. It allows us to quickly spin up more workers to do different things. I have <a title="Azure Workers" href="http://blog.noocyte.net/2013/11/22/azure-workers/">already posted</a> on how to use this project, so I won&#8217;t repeat myself, but instead talk about why we chose to open source it and not keep it closed off.</p>
+<p>Looking at Githubs President <a href="http://tom.preston-werner.com/">Tom Preston-Werner</a>&#8216;s blog post about this same issue he basically makes the points for me! So, thank you Tom! I would like to highlight two things though:</p>
+<ol>
+<li>We do not open source business critical parts</li>
+<li>Open sourcing parts of our stack makes it possible and legal for us to use code written at work for hobby/home projects</li>
+</ol>
+<h2>Business critical parts</h2>
+<p>For us all code related to risk management is any way is business critical, it is the essence of UXRisk and what Proactima can bring to the software world. This needs to be protected and so we do not open source it. So far it has been very easy in determining if something is business critical or not, presumably it will get harder as we develop more code in the gray areas between technology and risk knowledge.</p>
+<h2>Use in hobby/home projects</h2>
+<p>In most employment contracts it is specified that all work carried out during office hours when employed belongs to your employer, which is only to be expected! But if you open source that work then you are free to use the code/result in other projects too! A colleague of mine, <a href="https://github.com/grapz">Anders Østhus</a>, is using our <a title="Azure Workers" href="http://blog.noocyte.net/2013/11/22/azure-workers/">AzureWorkers </a>in his latest project (to be published I hope!). This would have been hard to do, legally, if we had not open source that project.</p>
+<p>In summary I would like to thank my employer for allowing me to not only blog about my work, but also to share the fruits of our labor with the world. So thank you <a href="http://www.proactima.no/en/">Proactima</a>!</p>
+]]></content:encoded>
+			<wfw:commentRss>http://blog.noocyte.net/2014/03/31/contributing-to-open-source-part-ii/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Ninject and Factory Injection</title>
+		<link>http://blog.noocyte.net/2014/03/31/ninject-and-factory-injection/</link>
+		<comments>http://blog.noocyte.net/2014/03/31/ninject-and-factory-injection/#comments</comments>
+		<pubDate>Mon, 31 Mar 2014 07:17:55 +0000</pubDate>
+		<dc:creator><![CDATA[noocyte]]></dc:creator>
+				<category><![CDATA[Geek]]></category>
+		<category><![CDATA[uxrisk]]></category>
+		<category><![CDATA[ninject]]></category>
+		<category><![CDATA[open source]]></category>
+
+		<guid isPermaLink="false">http://blog.noocyte.net/?p=1602</guid>
+		<description><![CDATA[We have a requirement to instantiate a service facade based on a single parameter, this parameter will then be used to load configuration settings appropriately. A fellow team member reminded me that this looked like a factory requirement so I started to look at Ninject Factory. At first I didn&#8217;t quite get the examples, but &#8230; <a href="http://blog.noocyte.net/2014/03/31/ninject-and-factory-injection/" class="more-link">Continue reading <span class="screen-reader-text">Ninject and Factory Injection</span> <span class="meta-nav">&#8594;</span></a>]]></description>
+				<content:encoded><![CDATA[<p>We have a requirement to instantiate a service facade based on a single parameter, this parameter will then be used to load configuration settings appropriately. A fellow team member reminded me that this looked like a factory requirement so I started to look at <a href="https://github.com/ninject/ninject.extensions.factory">Ninject Factory</a>. At first I didn&#8217;t quite get the examples, but decided to just try it out and see what would work. Turns out to be pretty simple! This post is mostly as a reminder to myself and perhaps a bit of guidance for others looking at doing the same.</p>
+<p>There are three requirements for using Ninject Factory:</p>
+<ol>
+<li>Install the <a href="https://www.nuget.org/packages/Ninject.Extensions.Factory/">nuget package</a></li>
+<li>Create a factory interface</li>
+<li>Create a binding to the interface</li>
+</ol>
+<p>Point number two looked like this for me:</p>
+<script src="https://gist.github.com/9886738.js"></script>
+<p>The IServiceFacade interface and concrete implementation looks like this:</p>
+<script src="https://gist.github.com/9886776.js"></script>
+<p>Tying it all together is the Ninject Module:</p>
+<script src="https://gist.github.com/9886799.js"></script>
+<p>Line number 5 will make Ninject create a proxy that calls the constructor on ServiceFacade, with the prefix input and the IService implementation (bound on line 7). To make use of the factory I did this:</p>
+<script src="https://gist.github.com/9886878.js"></script>
+<p>Here I inject the factory interface and call the create method (line 23). The magic happens inside that create method, since this is a proxy generated for me by Ninject! The really cool thing is that all regular bindings still apply, so if you look at the constructor for ServiceFacade it takes the prefix string and an interface (IService) that I bind in my module. Stepping into (F11) the create method in debug mode I end up in the constructor for ServiceFacade, perhaps as expected, but very cool!</p>
+<p>Also worth mentioning; you could have more inputs to the create method and only the names matter, ordering does not. So if I needed both prefix and postfix I would have them in any order between the factory interface and the constructor, as long as names match it&#8217;s OK. And finally you are not restricted to one method on the factory interface, so I could have had a CreateWithPrefix and a CreateWithPostfix method etc.</p>
+<p>The complete source for this is not available, as it&#8217;s part of a much bigger project known as <a href="http://uxrisk.com">UXRisk</a> and it is not open source.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://blog.noocyte.net/2014/03/31/ninject-and-factory-injection/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Contributing to open source, part I</title>
+		<link>http://blog.noocyte.net/2014/03/27/contributing-to-open-source/</link>
+		<comments>http://blog.noocyte.net/2014/03/27/contributing-to-open-source/#comments</comments>
+		<pubDate>Thu, 27 Mar 2014 09:50:54 +0000</pubDate>
+		<dc:creator><![CDATA[noocyte]]></dc:creator>
+				<category><![CDATA[Geek]]></category>
+		<category><![CDATA[uxrisk]]></category>
+		<category><![CDATA[open source]]></category>
+
+		<guid isPermaLink="false">http://blog.noocyte.net/?p=1562</guid>
+		<description><![CDATA[Proactima values knowledge and part of that is sharing the knowledge. One way of sharing, in software development, is to contribute to open source projects. So in UXRisk we have contributed to open source projects that we use: Ninject.Extensions.Azure Semantic Logging Application Block Ninject.Extensions.Azure We have contributed minor fixes to package versions and the ability &#8230; <a href="http://blog.noocyte.net/2014/03/27/contributing-to-open-source/" class="more-link">Continue reading <span class="screen-reader-text">Contributing to open source, part I</span> <span class="meta-nav">&#8594;</span></a>]]></description>
+				<content:encoded><![CDATA[<p>Proactima values knowledge and part of that is sharing the knowledge. One way of sharing, in software development, is to contribute to open source projects. So in UXRisk we have contributed to open source projects that we use:</p>
+<ul>
+<li><a href="https://github.com/ninject/ninject.extensions.azure">Ninject.Extensions.Azure</a></li>
+<li><a href="http://slab.codeplex.com/">Semantic Logging Application Block</a></li>
+</ul>
+<p><strong>Ninject.Extensions.Azure</strong></p>
+<p>We have contributed minor fixes to <a href="https://github.com/ninject/ninject.extensions.azure/commit/9db9b1f5ddc9f2cc5f1d3d573c370bfb466e8118">package versions</a> and the ability to <a href="https://github.com/ninject/ninject.extensions.azure/commit/18417eadd46aef752d5b79371502de94128f310d">inject on Azure Worker Roles</a>. So just small changes that we needed in our work, but very rewarding to be able to fix it ourselves.</p>
+<p><strong>Semantic Logging Application Block</strong></p>
+<p>We are using ElasticSearch (ES) for our logging needs and there was no built in sink to store logs in ES, so we created our own implementation. We basically reused the code from Azure Table Storage and adapted it to our needs. In cooperation with <a href="http://www.codeplex.com/site/users/view/trentmswanson">another member</a> of the Semantic Logging Application Block (SLAB) codeplex site our code was accepted into the master branch of SLAB.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://blog.noocyte.net/2014/03/27/contributing-to-open-source/feed/</wfw:commentRss>
+		<slash:comments>1</slash:comments>
+		</item>
+		<item>
+		<title>Azure Workers</title>
+		<link>http://blog.noocyte.net/2013/11/22/azure-workers/</link>
+		<comments>http://blog.noocyte.net/2013/11/22/azure-workers/#comments</comments>
+		<pubDate>Fri, 22 Nov 2013 11:44:41 +0000</pubDate>
+		<dc:creator><![CDATA[noocyte]]></dc:creator>
+				<category><![CDATA[Geek]]></category>
+		<category><![CDATA[uxrisk]]></category>
+		<category><![CDATA[open source]]></category>
+
+		<guid isPermaLink="false">http://blog.noocyte.net/?p=1252</guid>
+		<description><![CDATA[In my new project (UXRisk) we had a requirement to do a lot of background processing, based on messages passed over Azure Service Bus. We did a lot of research online and found good examples of how to properly to this and the outcome was a project we call AzureWorkers. AzureWorkers makes it super easy to &#8230; <a href="http://blog.noocyte.net/2013/11/22/azure-workers/" class="more-link">Continue reading <span class="screen-reader-text">Azure Workers</span> <span class="meta-nav">&#8594;</span></a>]]></description>
+				<content:encoded><![CDATA[<p>In my new project (UXRisk) we had a requirement to do a lot of background processing, based on messages passed over Azure Service Bus. We did a lot of research online and found good examples of how to properly to this and the outcome was a project we call <a href="https://github.com/proactima/AzureWorkers">AzureWorkers</a>.</p>
+<p><a href="https://github.com/proactima/AzureWorkers">AzureWorkers</a> makes it super easy to run multiple workers in one Azure Worker Role, all async and safe. You as the implementor basically have to just inherit from one out of three base classes (depening on Service Bus/Storage Queue  is used or not) and that class will run in its own thread and will be restarted if it fails.</p>
+<p>There are four supported scenarios:</p>
+<ul>
+<li>Startup Task &#8211; Will only be executed when the Worker Role starts. Implement IStartupTask to enable this scenario.</li>
+<li>Base Worker &#8211; Will be called continuously (basically every second), for you to do work and control the timer. Inherit from BaseWorker to enable this scenario.</li>
+<li>Base Queue Worker &#8211; Will call the Do method with messages retrieved from the Azure  Storage Queue. Inherit from BaseQueueWorker to enable this scenario.</li>
+<li>Base ServiceBus Worker &#8211; Will call the Do method whenever a message is posted to the topic specified in the TopicName overload. Inherit from BaseServiceBusWorker to enable this scenario.</li>
+</ul>
+<p>On GitHub an example project is included to document these three scenarios. To get started using AzureWorker you can get the <a href="https://www.nuget.org/packages/AzureWorkers">nuget package</a>.</p>
+<h3>Please note</h3>
+<p>AzureWorker depends on these projects:</p>
+<ul>
+<li>Ninject &#8211; version 3.0.2-unstable-9038</li>
+<li>Ninject.Extensions.Azure &#8211; version 3.0.2-unstable-9009</li>
+<li>Ninject.Extensions.Conventions  &#8211; version 3.0.2-unstable-9010</li>
+<li>Microsoft.WindowsAzure.ConfigurationManager &#8211; version 2.0.1.0</li>
+<li>WindowsAzure.ServiceBus &#8211; version 2.2.1.0</li>
+</ul>
+<p>Some of the code has been borrowed from a <a href="http://mark.mymonster.nl/2013/01/29/running-multiple-workers-inside-one-windows-azure-worker-role">blog post</a> by Mark Monster and a <a href="http://www.31a2ba2a-b718-11dc-8314-0800200c9a66.com/2010/12/running-multiple-threads-on-windows.html">blog post</a> by Wayne Walter Berry.</p>
+<p>There are a at least two issues with the code right now:</p>
+<ul>
+<li>If the processing of a message fails it will re-post the message directly and retry, no waiting time (Service Bus Worker).</li>
+<li>The implementer has to delete messages manually (by intent).</li>
+<li>It is depending on Ninject, not a generic IoC framework</li>
+</ul>
+<p>We will accept PRs to alleviate these issues.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://blog.noocyte.net/2013/11/22/azure-workers/feed/</wfw:commentRss>
+		<slash:comments>1</slash:comments>
+		</item>
+		<item>
+		<title>Marquee de Sells: Chris&#8217;s insight outlet</title>
+		<link>http://blog.noocyte.net/2008/10/01/marquee-de-sells-chriss-insight-outlet/</link>
+		<comments>http://blog.noocyte.net/2008/10/01/marquee-de-sells-chriss-insight-outlet/#comments</comments>
+		<pubDate>Wed, 01 Oct 2008 07:21:55 +0000</pubDate>
+		<dc:creator><![CDATA[noocyte]]></dc:creator>
+				<category><![CDATA[Geek]]></category>
+		<category><![CDATA[Link]]></category>
+		<category><![CDATA[jQuery]]></category>
+		<category><![CDATA[microsoft]]></category>
+		<category><![CDATA[open source]]></category>
+
+		<guid isPermaLink="false">http://noocyte.wordpress.com/2008/10/01/marquee-de-sells-chriss-insight-outlet/</guid>
+		<description><![CDATA[Chris Sells also comments on the jQuery thing and I have to say I respect that man! Let’s hope his best-case scenario pans out: … is that Microsoft learns to play nicely in this world, submitting features, changes and bug fixes to the jQuery source tree in a way that&#8217;s consistent with the vision from &#8230; <a href="http://blog.noocyte.net/2008/10/01/marquee-de-sells-chriss-insight-outlet/" class="more-link">Continue reading <span class="screen-reader-text">Marquee de Sells: Chris&#8217;s insight outlet</span> <span class="meta-nav">&#8594;</span></a>]]></description>
+				<content:encoded><![CDATA[<p> Chris Sells also comments on the <a href="http://noocyte.wordpress.com/2008/09/29/jquery-and-microsoft-scottgus-blog/">jQuery thing</a> and I have to say I respect that man! Let’s hope his best-case scenario pans out:</p>
+<blockquote><p>… is that Microsoft learns to play nicely in this world, submitting features, changes and bug fixes to the jQuery source tree in a way that&#8217;s consistent with the vision from which jQuery sprang, making it work better for Microsoft customers and non-Microsoft customers alike.</p></blockquote>
+<p><a href="http://www.sellsbrothers.com/news/showTopic.aspx?ixTopic=2194">Marquee de Sells: Chris&#8217;s insight outlet</a></p>
+]]></content:encoded>
+			<wfw:commentRss>http://blog.noocyte.net/2008/10/01/marquee-de-sells-chriss-insight-outlet/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>jQuery and Microsoft &#8211; ScottGu&#8217;s Blog</title>
+		<link>http://blog.noocyte.net/2008/09/29/jquery-and-microsoft-scottgus-blog/</link>
+		<comments>http://blog.noocyte.net/2008/09/29/jquery-and-microsoft-scottgus-blog/#comments</comments>
+		<pubDate>Mon, 29 Sep 2008 05:58:35 +0000</pubDate>
+		<dc:creator><![CDATA[noocyte]]></dc:creator>
+				<category><![CDATA[Geek]]></category>
+		<category><![CDATA[Link]]></category>
+		<category><![CDATA[.net]]></category>
+		<category><![CDATA[Javascript]]></category>
+		<category><![CDATA[jQuery]]></category>
+		<category><![CDATA[open source]]></category>
+		<category><![CDATA[visual studio]]></category>
+
+		<guid isPermaLink="false">http://noocyte.wordpress.com/2008/09/29/jquery-and-microsoft-scottgus-blog/</guid>
+		<description><![CDATA[&#160; that Microsoft will be shipping jQuery with Visual Studio going forward. We will distribute the jQuery JavaScript library as-is, and will not be forking or changing the source from the main jQuery branch. The files will continue to use and ship under the existing jQuery MIT license. We will also distribute intellisense-annotated versions that &#8230; <a href="http://blog.noocyte.net/2008/09/29/jquery-and-microsoft-scottgus-blog/" class="more-link">Continue reading <span class="screen-reader-text">jQuery and Microsoft &#8211; ScottGu&#8217;s Blog</span> <span class="meta-nav">&#8594;</span></a>]]></description>
+				<content:encoded><![CDATA[<p>&#160;</p>
+<blockquote><p>that Microsoft will be shipping jQuery with Visual Studio going forward. We will distribute the jQuery JavaScript library as-is, and will not be forking or changing the source from the main jQuery branch. The files will continue to use and ship under the existing jQuery MIT license. We will also distribute intellisense-annotated versions that provide great Visual Studio intellisense and help-integration at design-time.</p>
+</blockquote>
+<p><font color="#777777">Another win for ScottGu and Microsoft! Well done! And this I believe is the way Microsoft should continue to do business in the future. Some might see it as embrace and extend, and in some respects it is, but in a good way. <img src="http://blog.noocyte.net/wp-includes/images/smilies/simple-smile.png" alt=":)" class="wp-smiley" style="height: 1em; max-height: 1em;" /> Take my word for it. </font></p>
+<p><a href="http://weblogs.asp.net/scottgu/archive/2008/09/28/jquery-and-microsoft.aspx">jQuery and Microsoft &#8211; ScottGu&#8217;s Blog</a></p>
+]]></content:encoded>
+			<wfw:commentRss>http://blog.noocyte.net/2008/09/29/jquery-and-microsoft-scottgus-blog/feed/</wfw:commentRss>
+		<slash:comments>1</slash:comments>
+		</item>
+		<item>
+		<title>Singularity RDK &#8211; Home</title>
+		<link>http://blog.noocyte.net/2008/03/07/singularity-rdk-home/</link>
+		<comments>http://blog.noocyte.net/2008/03/07/singularity-rdk-home/#comments</comments>
+		<pubDate>Fri, 07 Mar 2008 15:15:47 +0000</pubDate>
+		<dc:creator><![CDATA[noocyte]]></dc:creator>
+				<category><![CDATA[Link]]></category>
+		<category><![CDATA[microsoft]]></category>
+		<category><![CDATA[open source]]></category>
+		<category><![CDATA[singularity]]></category>
+		<category><![CDATA[virtualization]]></category>
+
+		<guid isPermaLink="false">http://noocyte.wordpress.com/2008/03/07/singularity-rdk-home/</guid>
+		<description><![CDATA[Singularity, in code and binary! How cool is that? Holy cow! I&#8217;ve been fascinated by Singularity from day #1 and this is another step towards my dream; Microsoft creates a super stable/secure/responsive OS, using the best tools and best practice we know now and implements a Super Powerful(tm) virtualization engine that enables us (users) to &#8230; <a href="http://blog.noocyte.net/2008/03/07/singularity-rdk-home/" class="more-link">Continue reading <span class="screen-reader-text">Singularity RDK &#8211; Home</span> <span class="meta-nav">&#8594;</span></a>]]></description>
+				<content:encoded><![CDATA[<p>Singularity, in code and binary! How cool is that? Holy cow! <img src="http://blog.noocyte.net/wp-includes/images/smilies/simple-smile.png" alt=":)" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+<p>I&#8217;ve been fascinated by Singularity from day #1 and this is another step towards my dream; Microsoft creates a super stable/secure/responsive OS, using the best tools and best practice we know now and implements a Super Powerful(tm) virtualization engine that enables us (users) to run every Windows version under the sun in a VM; thus enabling us to run every Window application ever written and then some! That sentence was ugly! I need to improve my writing skills&#8230; But the dream is there anyways. What would be even better is this; team up with one or more CPU manufacturers (Intel, IBM, AMD) and create an open and free architecture and build an open and free kernel on top of it. Then enable others to build great applications on top of that again. Microsoft could then sell their Windows Virtualization Engine to enable man+dog to run old Windows applications&#8230; Better yet; team up with Novel and make sure that the OS API is compatible with .Net/Mono so we can run most of our .Net application with out virtualization and we can develop applications in a managed 1 library, many languages world. How cool would that be? </p>
+<p><a href="http://www.codeplex.com/singularity">Singularity RDK &#8211; Home</a></p>
+]]></content:encoded>
+			<wfw:commentRss>http://blog.noocyte.net/2008/03/07/singularity-rdk-home/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>SUPERGUIDE: The Open Source Challenge. How to replace Windows completely with Ubuntu. &#124; APC Magazine</title>
+		<link>http://blog.noocyte.net/2007/10/22/superguide-the-open-source-challenge-how-to-replace-windows-completely-with-ubuntu-apc-magazine/</link>
+		<comments>http://blog.noocyte.net/2007/10/22/superguide-the-open-source-challenge-how-to-replace-windows-completely-with-ubuntu-apc-magazine/#comments</comments>
+		<pubDate>Mon, 22 Oct 2007 13:09:53 +0000</pubDate>
+		<dc:creator><![CDATA[noocyte]]></dc:creator>
+				<category><![CDATA[Link]]></category>
+		<category><![CDATA[guide]]></category>
+		<category><![CDATA[linux]]></category>
+		<category><![CDATA[open source]]></category>
+		<category><![CDATA[ubuntu]]></category>
+
+		<guid isPermaLink="false">http://noocyte.wordpress.com/2007/10/22/superguide-the-open-source-challenge-how-to-replace-windows-completely-with-ubuntu-apc-magazine/</guid>
+		<description><![CDATA[&#160; Link to SUPERGUIDE: The Open Source Challenge. How to replace Windows completely with Ubuntu. &#124; APC Magazine]]></description>
+				<content:encoded><![CDATA[<p>&nbsp;</p>
+<p><a href="http://apcmag.com/6574/replace_windows_with_linux_part_1_installing_and_updating_ubuntu">Link to SUPERGUIDE: The Open Source Challenge. How to replace Windows completely with Ubuntu. | APC Magazine</a></p>
+]]></content:encoded>
+			<wfw:commentRss>http://blog.noocyte.net/2007/10/22/superguide-the-open-source-challenge-how-to-replace-windows-completely-with-ubuntu-apc-magazine/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+	</channel>
+</rss>

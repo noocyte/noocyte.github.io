@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Home of noocyte &#187; entity framework</title>
+	<atom:link href="http://blog.noocyte.net/tag/entity-framework/feed/" rel="self" type="application/rss+xml" />
+	<link>http://blog.noocyte.net</link>
+	<description>Ramblings of a mad mind</description>
+	<lastBuildDate>Fri, 04 Apr 2014 13:39:58 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>ORMs and Performance</title>
+		<link>http://blog.noocyte.net/2012/09/07/orms-and-performance/</link>
+		<comments>http://blog.noocyte.net/2012/09/07/orms-and-performance/#comments</comments>
+		<pubDate>Fri, 07 Sep 2012 11:01:31 +0000</pubDate>
+		<dc:creator><![CDATA[noocyte]]></dc:creator>
+				<category><![CDATA[Geek]]></category>
+		<category><![CDATA[entity framework]]></category>
+		<category><![CDATA[orm]]></category>
+		<category><![CDATA[performance]]></category>
+
+		<guid isPermaLink="false">http://blog.noocyte.net/?p=662</guid>
+		<description><![CDATA[In one of my projects, actually Proactimas project, I’m using Entity Framework (EF) on top of SQL Azure and it works pretty well; data access is relatively fast, dead easy most of the time and the cost (in $) is OK. However I have discovered how sensitive EF is to how you write your queries. &#8230; <a href="http://blog.noocyte.net/2012/09/07/orms-and-performance/" class="more-link">Continue reading <span class="screen-reader-text">ORMs and Performance</span> <span class="meta-nav">&#8594;</span></a>]]></description>
+				<content:encoded><![CDATA[<p>In one of my projects, actually <a href="http://proactima.no/">Proactimas</a> project, I’m using <a href="http://msdn.microsoft.com/en-us/data/ef.aspx">Entity Framework</a> (EF) on top of <a href="http://www.windowsazure.com/home/features/data-management/">SQL Azure</a> and it works pretty well; data access is relatively fast, dead easy most of the time and the cost (in $) is OK. However I have discovered how sensitive EF is to how you write your queries. It appears to be especially true if you have several one-to-many relationships. </p>
+<p>Just a quick introduction to Proactima Compliance; Any user has access to one or more companies, each company consists of one or more units. Units can be things like ‘Head Office’, IT-department, a ship etc. For every unit there can be one or more evaluations and each evaluation is based on a set of rules that the company measure compliance against. An example of a ruleset is the <a href="http://www.npd.no/en/Regulations/Acts/Petroleum-activities-act/">Petroleum Activities Act</a> in Norway. </p>
+<p>In <a href="http://www.proactima.no">Proactima</a> Compliance the most frequently accessed page had an action that took about 1000ms to complete. This page allows the user to evaluate a rule and then choose ‘Save and Next’; so there are two actions involved:</p>
+<ol>
+<li>Save current rule and find next based on previous rules’ sequence
+<li>Load next rule and display it to the user</li>
+</ol>
+<p>The second action completes in 200-400ms, but the first takes from 800-1200 ms to complete. The main reason for the long processing time is what <a href="http://miniprofiler.com/">MiniProfiler</a> calls Duplicate Readers. Basically, because of the way I had written my queries it was executing a reader querying for each rule in a ruleset! It looked like this:</p>
+<p><a href="http://blog.noocyte.net/wp-content/uploads/2012/09/Pre_Optimize.png"><img title="Pre_Optimize" style="border-left-width: 0px; border-right-width: 0px; background-image: none; border-bottom-width: 0px; padding-top: 0px; padding-left: 0px; display: inline; padding-right: 0px; border-top-width: 0px" border="0" alt="Pre_Optimize" src="http://blog.noocyte.net/wp-content/uploads/2012/09/Pre_Optimize_thumb.png" width="590" height="144"></a></p>
+<p>It’s running 103 (!) queries just for that one action, that’s terrible! The actual query looked like this:</p>
+<pre class="brush: c-sharp; toolbar: false">var rules = from r in evaluationRule.Evaluation.Rules
+                 where r.Rule.Sequence &gt; currentSequence 
+                 orderby r.Rule.Sequence 
+                 select r;</pre>
+<p>The variable ‘evaluationRule’ was already fetched from the database and so I was just navigating to its Evaluation (remember how an evaluation is based on a ruleset which in turn consists of individual rules) and then the ruleset for that evaluation. Then I set up the where clause to make sure we can only get a rule with a sequence higher than the current rule. Finally I do an order by and select, from this I will only choose the first rule thus getting the next rule based on sequence. Possible bug here; sequences could potentially be same, but I’m 100% in control of the sequences so that’s really not an issue.</p>
+<p>I won’t show the rendered query from this, it’s a nightmare, but the end result is correct and dead slow… So I had to fix this! I tried to manipulate the query in a try-fail-retry pattern; no success at all! I figured after awhile that I was addressing the issue from the wrong end; I was just thinking of the code. Thinking back on previous issues I’ve had with generated Sql (from other ORMs) I remembered (finally!) an old lesson; start by writing the query manually in the best possible way you can and <em>then</em> try to express that same query using the ORM! So that’s what I did! I fired up <a href="http://www.microsoft.com/en-us/download/details.aspx?id=22985">Sql Server Management Studio Express 2012 Deluxe Gold Plated Edition</a>, or whatever it’s called and thought really hard about what I <strong>really</strong> needed. What I ended up with was this:</p>
+<pre class="brush: sql; toolbar: false">DECLARE @currentSequence int = 1;
+DECLARE @currentEvaluation int = 1;
+
+select	top 1 er.ID, 
+	er.RuleID,
+	r.Sequence,
+	er.EvaluationID
+from	EvaluationRules er,
+	Rules r
+where	er.RuleID = r.ID
+and	er.EvaluationID = @currentEvaluation
+and	r.Sequence &gt; @currentSequence
+order by r.Sequence;</pre>
+<p>Not that hard to write at all. Now all I needed was to convert it to EF code:</p>
+<pre class="brush: c-sharp; toolbar: false">var rules =
+    (from er in Database.EvaluationRules
+        join r in Database.Rules on er.RuleID equals r.ID
+        where er.EvaluationID == evaluationId
+        &amp;&amp; r.Sequence &gt; currentSequence
+        orderby r.Sequence
+        select er)
+        .Take(1);</pre>
+<p>It’s definitely a bit more than my original code based query, but as you can see it looks a whole lot like the manual sql query. And how does MiniProfiler now report on my page:</p>
+<p><a href="http://blog.noocyte.net/wp-content/uploads/2012/09/Post_Optimize.png"><img title="Post_Optimize" style="border-left-width: 0px; border-right-width: 0px; background-image: none; border-bottom-width: 0px; padding-top: 0px; padding-left: 0px; display: inline; padding-right: 0px; border-top-width: 0px" border="0" alt="Post_Optimize" src="http://blog.noocyte.net/wp-content/uploads/2012/09/Post_Optimize_thumb.png" width="574" height="136"></a><br /><em>Please ignore the minor differences (controller name); I have done some other refactoring&#8217;s as well as the query.</em></p>
+<p>What an amazing change! 900ms to 222ms! And 100+ queries to just 7! That’s performance optimizations the user notices! </p>
+<p>But why did it all go so terribly wrong in the first place? I’m not going to over analyze the two queries or discuss how EF generates the Sql; somebody much smarter than me can probably do that (or has!). But what I learned from all this is that my old skills as Sql developer isn’t lost even if I am using an ORM AND the way you express a query can matter a whole lot when it comes to performance! </p>
+]]></content:encoded>
+			<wfw:commentRss>http://blog.noocyte.net/2012/09/07/orms-and-performance/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>AutoMapper, aka AutoMagic</title>
+		<link>http://blog.noocyte.net/2011/10/13/automapper-aka-automagic/</link>
+		<comments>http://blog.noocyte.net/2011/10/13/automapper-aka-automagic/#comments</comments>
+		<pubDate>Thu, 13 Oct 2011 13:30:00 +0000</pubDate>
+		<dc:creator><![CDATA[noocyte]]></dc:creator>
+				<category><![CDATA[Geek]]></category>
+		<category><![CDATA[Asp.net mvc]]></category>
+		<category><![CDATA[automapper]]></category>
+		<category><![CDATA[entity framework]]></category>
+
+		<guid isPermaLink="false">https://noocyte.wordpress.com/2011/10/13/automapper-aka-automagic/</guid>
+		<description><![CDATA[&#160; Update 27.10.2011: It turns out that the implementation below is not really all that good. The map created with the custom resolver will be cached; so all future results from a mapping process will use the initial value (enityTwoId). I reverted to ignoring the property during the mapping and then setting it manually afterwards. &#8230; <a href="http://blog.noocyte.net/2011/10/13/automapper-aka-automagic/" class="more-link">Continue reading <span class="screen-reader-text">AutoMapper, aka AutoMagic</span> <span class="meta-nav">&#8594;</span></a>]]></description>
+				<content:encoded><![CDATA[<p>&nbsp;</p>
+<p><em>Update 27.10.2011: It turns out that the implementation below is not really all that good. The map created with the custom resolver will be cached; so all future results from a mapping process will use the initial value (enityTwoId). I reverted to ignoring the property during the mapping and then setting it manually afterwards.</em></p>
+<p>We are currently working on a re-write of an application here at Proactima and in that process I’ve decided to use <a href="http://www.hanselman.com/blog/SimpleCodeFirstWithEntityFramework4MagicUnicornFeatureCTP4.aspx">EF 4.1 Magic Unicorn Edtion</a> as my backend. It supports <a href="http://en.wikipedia.org/wiki/Plain_Old_CLR_Object">POCO</a>s, but sometimes I don’t really wanna send the whole object to the view; so I create some view specific classes to use for this purpose. Mapping between the entity class and the view class would be tedious work was it not for the magic of <a href="http://automapper.org/">AutoMapper</a>! It handles the <a href="http://answers.yahoo.com/question/index?qid=20080903013225AAidwbW">RHS-LHS</a> mapping for me! How cool! But sometimes even magic needs a helping hand and AutoMapper accepts it!</p>
+<p>These are my entity classes (not the actual classes…):</p>
+<blockquote><p>public class EntityOne<br />{<br />&nbsp;&nbsp;&nbsp; public int EntityOneID { get; set; }<br />&nbsp;&nbsp;&nbsp; public string Title { get; set; }<br />&nbsp;&nbsp;&nbsp; public virtual ICollection&lt;EntityTwo&gt; EntityTwos { get; set; }<br />}</p>
+<p>public class EntityTwo<br />{<br />&nbsp;&nbsp;&nbsp; public int EntityTwoID { get; set; }<br />&nbsp;&nbsp;&nbsp; public string SomeInformation { get; set; }<br />&nbsp;&nbsp;&nbsp; public int EntityOneID { get; set; }<br />&nbsp;&nbsp;&nbsp; public virtual EntityOne EntityOne { get; set; }<br />}</p>
+</blockquote>
+<p>And these should be mapped to these classes:</p>
+<blockquote><p>public class EntityOneView<br />{<br />&nbsp;&nbsp;&nbsp; public int EntityOneID { get; set; }<br />&nbsp;&nbsp;&nbsp; public string Title { get; set; }<br />&nbsp;&nbsp;&nbsp; public virtual EntityTwoView EntityTwo { get; set; }<br />}</p>
+<p>public class EntityTwoView<br />{<br />&nbsp;&nbsp;&nbsp; public int EntityTwoID { get; set; }<br />&nbsp;&nbsp;&nbsp; public string SomeInformation { get; set; }&nbsp;&nbsp; <br />}</p>
+</blockquote>
+<p>Basically I only bring with me one of the “EntityTwoView” objects, as opposed to a list in the entity class. Naturally in an actual application the classes would be FAR more complex than these, but I needed this to illustrate the point. I find it easier to understand code where there is little or no noise.</p>
+<p>Given an “EntityOne” object I now want to map/convert it to an “EntityOneView” object before sending it of the the view (from the controller in ASP.Net MVC). If I didn’t have to list-&gt;one issue I could simply write these two lines:</p>
+<blockquote><p>EntityOne one = db.Load&lt;EntityOne&gt;(1);<br />Mapper.CreateMap&lt;EntityOne, EntityOneView&gt;();<br />EntityOneView oneView = Mapper.Map&lt;EntityOneView&gt;(one);</p>
+</blockquote>
+<p>But this will fail since AutoMapper have no idea on how to go from a list of EntityTwo’s to a single EntityTwo. So I have to help her (?) out a bit. I can do that by writing a <a href="http://automapper.codeplex.com/wikipage?title=Custom%20Value%20Resolvers">Custom Value Resolver</a>. It would for this code look like this:</p>
+<blockquote><p>public class SingleLineResolver : ValueResolver&lt;EntityOne, EntityTwoView&gt;<br />{<br />&nbsp;&nbsp;&nbsp; private int EntityTwoId { get; set; }<br />&nbsp;&nbsp;&nbsp; public SingleLineResolver(int entityTwoId)<br />&nbsp;&nbsp;&nbsp; {<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; this.EntityTwoId = entityTwoId;<br />&nbsp;&nbsp;&nbsp; }</p>
+<p>&nbsp;&nbsp;&nbsp; protected override EntityTwoView ResolveCore(EntityOne source)<br />&nbsp;&nbsp;&nbsp; {<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Mapper.CreateMap&lt;EntityTwo, EntityTwoView&gt;();<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var line = source.EntityTwos.First(e=&gt; e.EntityTwoID == this.EntityTwoId);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return Mapper.Map&lt;EntityTwoView&gt;(line);<br />&nbsp;&nbsp;&nbsp; }<br />}</p>
+</blockquote>
+<p>This code took me awhile to understand and be able to write… Now I might be stupid and you smart, so perhaps I’m the only one struggeling with this one… But to make use of it I had to update the previous code to:</p>
+<blockquote><p>EntityOne one = new EntityOne();<br />SingleLineResolver resolver = new SingleLineResolver(2);<br />Mapper.CreateMap&lt;EntityOne, EntityOneView&gt;()<br />&nbsp;&nbsp;&nbsp; .ForMember(dest =&gt; dest.EntityTwo, opt =&gt; opt.ResolveUsing(resolver));<br />EntityOneView oneView = Mapper.Map&lt;EntityOneView&gt;(one);</p>
+</blockquote>
+<p>Here I am basically saying that when you (AutoMapper) create the mapping between EntityOne and EntityOneView and come to the “EntityTwo” property (on the EntityOneView object) please use my custom value resolver (resolver) to figure out the value of that property. It will then send the “one” object into my custom value resolver class (SingleLineResolver) and the output will be set as the value of the property called “EntityTwo” on the new object of type “EntityOneView”; Puh! </p>
+<p>Basically AutoMapper let’s me use two objects (or more!) that are fairly similar and map between them. She (?) will handle complex scenarios like this and much, much more. I hereby dub the project “AutoMagic”. </p>
+<p><em>Please note that the code I present here has been severly altered from the actual production code, so please don’t shoot me if it fails to work as expected!</em></p>
+]]></content:encoded>
+			<wfw:commentRss>http://blog.noocyte.net/2011/10/13/automapper-aka-automagic/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+	</channel>
+</rss>

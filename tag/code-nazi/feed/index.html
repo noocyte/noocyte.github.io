@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Home of noocyte &#187; code nazi</title>
+	<atom:link href="http://blog.noocyte.net/tag/code-nazi/feed/" rel="self" type="application/rss+xml" />
+	<link>http://blog.noocyte.net</link>
+	<description>Ramblings of a mad mind</description>
+	<lastBuildDate>Fri, 04 Apr 2014 13:39:58 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>DRY in the real world</title>
+		<link>http://blog.noocyte.net/2009/08/27/dry-in-the-real-world/</link>
+		<comments>http://blog.noocyte.net/2009/08/27/dry-in-the-real-world/#comments</comments>
+		<pubDate>Thu, 27 Aug 2009 08:24:00 +0000</pubDate>
+		<dc:creator><![CDATA[noocyte]]></dc:creator>
+				<category><![CDATA[Geek]]></category>
+		<category><![CDATA[code]]></category>
+		<category><![CDATA[code nazi]]></category>
+		<category><![CDATA[dry]]></category>
+
+		<guid isPermaLink="false">http://noocyte.wordpress.com/2009/08/27/dry-in-the-real-world/</guid>
+		<description><![CDATA[In programming there are many, many principles. One of the more useful ones that I’ve discovered lately is DRY: Don’t Repeat Yourself. It’s simple really, never ever copy code and don’t write the same code twice. In the real world it might not be as easy though… Today I was about to check in some &#8230; <a href="http://blog.noocyte.net/2009/08/27/dry-in-the-real-world/" class="more-link">Continue reading <span class="screen-reader-text">DRY in the real world</span> <span class="meta-nav">&#8594;</span></a>]]></description>
+				<content:encoded><![CDATA[<p>In programming there are many, many principles. One of the more useful ones that I’ve discovered lately is <a href="http://en.wikipedia.org/wiki/Don%27t_repeat_yourself">DRY</a>: <strong>Don’t Repeat Yourself</strong>. It’s simple really, never ever copy code and don’t write the same code twice. In the real world it might not be as easy though… </p>
+<p>Today I was about to check in some code and I went through my regular check-in routine (you have one as well I presume?) and discovered that I was violating DRY! At least if you’re being anal about it… The code in question was a little like this: (slightly altered to protect the innocents)</p>
+<div style="border-bottom:silver 1px solid;text-align:left;border-left:silver 1px solid;line-height:12pt;background-color:#f4f4f4;width:97.5%;font-family:&#39;direction:ltr;max-height:200px;font-size:8pt;overflow:auto;border-top:silver 1px solid;cursor:text;border-right:silver 1px solid;margin:20px 0 10px;padding:4px;" id="codeSnippetWrapper">
+<div style="text-align:left;line-height:12pt;background-color:#f4f4f4;width:100%;font-family:&#39;direction:ltr;color:black;font-size:8pt;overflow:visible;border-style:none;padding:0;" id="codeSnippet">
+<pre style="text-align:left;line-height:12pt;background-color:white;width:100%;font-family:&#39;direction:ltr;color:black;font-size:8pt;overflow:visible;border-style:none;margin:0;padding:0;"><span style="color:#606060;" id="lnum1">   1:</span> <span style="color:#0000ff;">using</span> (SPSite site = <span style="color:#0000ff;">new</span> SPSite(url)) {</pre>
+<p><!--CRLF--></p>
+<pre style="text-align:left;line-height:12pt;background-color:#f4f4f4;width:100%;font-family:&#39;direction:ltr;color:black;font-size:8pt;overflow:visible;border-style:none;margin:0;padding:0;"><span style="color:#606060;" id="lnum2">   2:</span>     <span style="color:#0000ff;">using</span> (SPWeb web = site.OpenWeb()) {</pre>
+<p><!--CRLF--></p>
+<pre style="text-align:left;line-height:12pt;background-color:white;width:100%;font-family:&#39;direction:ltr;color:black;font-size:8pt;overflow:visible;border-style:none;margin:0;padding:0;"><span style="color:#606060;" id="lnum3">   3:</span>         lang = web.Language;</pre>
+<p><!--CRLF--></p>
+<pre style="text-align:left;line-height:12pt;background-color:#f4f4f4;width:100%;font-family:&#39;direction:ltr;color:black;font-size:8pt;overflow:visible;border-style:none;margin:0;padding:0;"><span style="color:#606060;" id="lnum4">   4:</span>     }</pre>
+<p><!--CRLF--></p>
+<pre style="text-align:left;line-height:12pt;background-color:white;width:100%;font-family:&#39;direction:ltr;color:black;font-size:8pt;overflow:visible;border-style:none;margin:0;padding:0;"><span style="color:#606060;" id="lnum5">   5:</span> }</pre>
+<p><!--CRLF--></div>
+</div>
+<p>(I didn’t really return the language, but no need to include all of the source code)</p>
+<p>So I was doing the double using in 4-5 places; a clear violation of DRY in my book. So what I did was this:</p>
+<div style="border-bottom:silver 1px solid;text-align:left;border-left:silver 1px solid;line-height:12pt;background-color:#f4f4f4;width:97.5%;font-family:&#39;direction:ltr;max-height:200px;font-size:8pt;overflow:auto;border-top:silver 1px solid;cursor:text;border-right:silver 1px solid;margin:20px 0 10px;padding:4px;" id="codeSnippetWrapper">
+<div style="text-align:left;line-height:12pt;background-color:#f4f4f4;width:100%;font-family:&#39;direction:ltr;color:black;font-size:8pt;overflow:visible;border-style:none;padding:0;" id="codeSnippet">
+<pre style="text-align:left;line-height:12pt;background-color:white;width:100%;font-family:&#39;direction:ltr;color:black;font-size:8pt;overflow:visible;border-style:none;margin:0;padding:0;"><span style="color:#606060;" id="lnum1">   1:</span> <span style="color:#0000ff;">private</span> T OpenSiteWeb&lt;T&gt;(<span style="color:#0000ff;">string</span> url, Func&lt;SPSite, SPWeb, T&gt; implementingMember) {</pre>
+<p><!--CRLF--></p>
+<pre style="text-align:left;line-height:12pt;background-color:#f4f4f4;width:100%;font-family:&#39;direction:ltr;color:black;font-size:8pt;overflow:visible;border-style:none;margin:0;padding:0;"><span style="color:#606060;" id="lnum2">   2:</span>    <span style="color:#0000ff;">using</span> (SPSite site = <span style="color:#0000ff;">new</span> SPSite(url)) {</pre>
+<p><!--CRLF--></p>
+<pre style="text-align:left;line-height:12pt;background-color:white;width:100%;font-family:&#39;direction:ltr;color:black;font-size:8pt;overflow:visible;border-style:none;margin:0;padding:0;"><span style="color:#606060;" id="lnum3">   3:</span>        <span style="color:#0000ff;">using</span> (SPWeb web = site.OpenWeb()) {</pre>
+<p><!--CRLF--></p>
+<pre style="text-align:left;line-height:12pt;background-color:#f4f4f4;width:100%;font-family:&#39;direction:ltr;color:black;font-size:8pt;overflow:visible;border-style:none;margin:0;padding:0;"><span style="color:#606060;" id="lnum4">   4:</span>            <span style="color:#0000ff;">return</span> implementingMember(site, web);</pre>
+<p><!--CRLF--></p>
+<pre style="text-align:left;line-height:12pt;background-color:white;width:100%;font-family:&#39;direction:ltr;color:black;font-size:8pt;overflow:visible;border-style:none;margin:0;padding:0;"><span style="color:#606060;" id="lnum5">   5:</span>        }</pre>
+<p><!--CRLF--></p>
+<pre style="text-align:left;line-height:12pt;background-color:#f4f4f4;width:100%;font-family:&#39;direction:ltr;color:black;font-size:8pt;overflow:visible;border-style:none;margin:0;padding:0;"><span style="color:#606060;" id="lnum6">   6:</span>    }</pre>
+<p><!--CRLF--></p>
+<pre style="text-align:left;line-height:12pt;background-color:white;width:100%;font-family:&#39;direction:ltr;color:black;font-size:8pt;overflow:visible;border-style:none;margin:0;padding:0;"><span style="color:#606060;" id="lnum7">   7:</span> }</pre>
+<p><!--CRLF--></div>
+</div>
+<p>This method I can use like this:</p>
+<div style="border-bottom:silver 1px solid;text-align:left;border-left:silver 1px solid;line-height:12pt;background-color:#f4f4f4;width:97.5%;font-family:&#39;direction:ltr;max-height:200px;font-size:8pt;overflow:auto;border-top:silver 1px solid;cursor:text;border-right:silver 1px solid;margin:20px 0 10px;padding:4px;" id="codeSnippetWrapper">
+<div style="text-align:left;line-height:12pt;background-color:#f4f4f4;width:100%;font-family:&#39;direction:ltr;color:black;font-size:8pt;overflow:visible;border-style:none;padding:0;" id="codeSnippet">
+<pre style="text-align:left;line-height:12pt;background-color:white;width:100%;font-family:&#39;direction:ltr;color:black;font-size:8pt;overflow:visible;border-style:none;margin:0;padding:0;"><span style="color:#606060;" id="lnum1">   1:</span> lang = OpenSiteWeb&lt;<span style="color:#0000ff;">uint</span>&gt;(url, (s, w) =&gt;</pre>
+<p><!--CRLF--></p>
+<pre style="text-align:left;line-height:12pt;background-color:#f4f4f4;width:100%;font-family:&#39;direction:ltr;color:black;font-size:8pt;overflow:visible;border-style:none;margin:0;padding:0;"><span style="color:#606060;" id="lnum2">   2:</span> {</pre>
+<p><!--CRLF--></p>
+<pre style="text-align:left;line-height:12pt;background-color:white;width:100%;font-family:&#39;direction:ltr;color:black;font-size:8pt;overflow:visible;border-style:none;margin:0;padding:0;"><span style="color:#606060;" id="lnum3">   3:</span>     <span style="color:#0000ff;">return</span> w.Language;</pre>
+<p><!--CRLF--></p>
+<pre style="text-align:left;line-height:12pt;background-color:#f4f4f4;width:100%;font-family:&#39;direction:ltr;color:black;font-size:8pt;overflow:visible;border-style:none;margin:0;padding:0;"><span style="color:#606060;" id="lnum4">   4:</span> }</pre>
+<p><!--CRLF--></div>
+</div>
+<p>Pretty neat, no? It might be overkill, but fun code to write anyway! </p>
+]]></content:encoded>
+			<wfw:commentRss>http://blog.noocyte.net/2009/08/27/dry-in-the-real-world/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Microsoft Source Analysis releases to web</title>
+		<link>http://blog.noocyte.net/2008/05/23/microsoft-source-analysis-releases-to-web/</link>
+		<comments>http://blog.noocyte.net/2008/05/23/microsoft-source-analysis-releases-to-web/#comments</comments>
+		<pubDate>Fri, 23 May 2008 20:04:30 +0000</pubDate>
+		<dc:creator><![CDATA[noocyte]]></dc:creator>
+				<category><![CDATA[Link]]></category>
+		<category><![CDATA[code nazi]]></category>
+
+		<guid isPermaLink="false">http://noocyte.wordpress.com/2008/05/23/microsoft-source-analysis-releases-to-web/</guid>
+		<description><![CDATA[Pretty cool tool! I&#8217;ve been thinking about starting a blog called &#8220;Code Nazi&#8221;, and this tool is just up my alley! Will test real soon! Microsoft Source Analysis releases to web]]></description>
+				<content:encoded><![CDATA[<p>Pretty cool tool! I&#8217;ve been thinking about starting a blog called &#8220;Code Nazi&#8221;, and this tool is just up my alley! <img src="http://blog.noocyte.net/wp-includes/images/smilies/simple-smile.png" alt=":)" class="wp-smiley" style="height: 1em; max-height: 1em;" /> Will test real soon!</p>
+<p><a href="http://blogs.msdn.com/msbuild/archive/2008/05/23/microsoft-source-analysis-releases-to-web.aspx">Microsoft Source Analysis releases to web</a></p>
+]]></content:encoded>
+			<wfw:commentRss>http://blog.noocyte.net/2008/05/23/microsoft-source-analysis-releases-to-web/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+	</channel>
+</rss>

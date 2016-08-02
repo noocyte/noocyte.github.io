@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Home of noocyte &#187; automapper</title>
+	<atom:link href="http://blog.noocyte.net/tag/automapper/feed/" rel="self" type="application/rss+xml" />
+	<link>http://blog.noocyte.net</link>
+	<description>Ramblings of a mad mind</description>
+	<lastBuildDate>Fri, 04 Apr 2014 13:39:58 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>AutoMapper, aka AutoMagic</title>
+		<link>http://blog.noocyte.net/2011/10/13/automapper-aka-automagic/</link>
+		<comments>http://blog.noocyte.net/2011/10/13/automapper-aka-automagic/#comments</comments>
+		<pubDate>Thu, 13 Oct 2011 13:30:00 +0000</pubDate>
+		<dc:creator><![CDATA[noocyte]]></dc:creator>
+				<category><![CDATA[Geek]]></category>
+		<category><![CDATA[Asp.net mvc]]></category>
+		<category><![CDATA[automapper]]></category>
+		<category><![CDATA[entity framework]]></category>
+
+		<guid isPermaLink="false">https://noocyte.wordpress.com/2011/10/13/automapper-aka-automagic/</guid>
+		<description><![CDATA[&#160; Update 27.10.2011: It turns out that the implementation below is not really all that good. The map created with the custom resolver will be cached; so all future results from a mapping process will use the initial value (enityTwoId). I reverted to ignoring the property during the mapping and then setting it manually afterwards. &#8230; <a href="http://blog.noocyte.net/2011/10/13/automapper-aka-automagic/" class="more-link">Continue reading <span class="screen-reader-text">AutoMapper, aka AutoMagic</span> <span class="meta-nav">&#8594;</span></a>]]></description>
+				<content:encoded><![CDATA[<p>&nbsp;</p>
+<p><em>Update 27.10.2011: It turns out that the implementation below is not really all that good. The map created with the custom resolver will be cached; so all future results from a mapping process will use the initial value (enityTwoId). I reverted to ignoring the property during the mapping and then setting it manually afterwards.</em></p>
+<p>We are currently working on a re-write of an application here at Proactima and in that process I’ve decided to use <a href="http://www.hanselman.com/blog/SimpleCodeFirstWithEntityFramework4MagicUnicornFeatureCTP4.aspx">EF 4.1 Magic Unicorn Edtion</a> as my backend. It supports <a href="http://en.wikipedia.org/wiki/Plain_Old_CLR_Object">POCO</a>s, but sometimes I don’t really wanna send the whole object to the view; so I create some view specific classes to use for this purpose. Mapping between the entity class and the view class would be tedious work was it not for the magic of <a href="http://automapper.org/">AutoMapper</a>! It handles the <a href="http://answers.yahoo.com/question/index?qid=20080903013225AAidwbW">RHS-LHS</a> mapping for me! How cool! But sometimes even magic needs a helping hand and AutoMapper accepts it!</p>
+<p>These are my entity classes (not the actual classes…):</p>
+<blockquote><p>public class EntityOne<br />{<br />&nbsp;&nbsp;&nbsp; public int EntityOneID { get; set; }<br />&nbsp;&nbsp;&nbsp; public string Title { get; set; }<br />&nbsp;&nbsp;&nbsp; public virtual ICollection&lt;EntityTwo&gt; EntityTwos { get; set; }<br />}</p>
+<p>public class EntityTwo<br />{<br />&nbsp;&nbsp;&nbsp; public int EntityTwoID { get; set; }<br />&nbsp;&nbsp;&nbsp; public string SomeInformation { get; set; }<br />&nbsp;&nbsp;&nbsp; public int EntityOneID { get; set; }<br />&nbsp;&nbsp;&nbsp; public virtual EntityOne EntityOne { get; set; }<br />}</p>
+</blockquote>
+<p>And these should be mapped to these classes:</p>
+<blockquote><p>public class EntityOneView<br />{<br />&nbsp;&nbsp;&nbsp; public int EntityOneID { get; set; }<br />&nbsp;&nbsp;&nbsp; public string Title { get; set; }<br />&nbsp;&nbsp;&nbsp; public virtual EntityTwoView EntityTwo { get; set; }<br />}</p>
+<p>public class EntityTwoView<br />{<br />&nbsp;&nbsp;&nbsp; public int EntityTwoID { get; set; }<br />&nbsp;&nbsp;&nbsp; public string SomeInformation { get; set; }&nbsp;&nbsp; <br />}</p>
+</blockquote>
+<p>Basically I only bring with me one of the “EntityTwoView” objects, as opposed to a list in the entity class. Naturally in an actual application the classes would be FAR more complex than these, but I needed this to illustrate the point. I find it easier to understand code where there is little or no noise.</p>
+<p>Given an “EntityOne” object I now want to map/convert it to an “EntityOneView” object before sending it of the the view (from the controller in ASP.Net MVC). If I didn’t have to list-&gt;one issue I could simply write these two lines:</p>
+<blockquote><p>EntityOne one = db.Load&lt;EntityOne&gt;(1);<br />Mapper.CreateMap&lt;EntityOne, EntityOneView&gt;();<br />EntityOneView oneView = Mapper.Map&lt;EntityOneView&gt;(one);</p>
+</blockquote>
+<p>But this will fail since AutoMapper have no idea on how to go from a list of EntityTwo’s to a single EntityTwo. So I have to help her (?) out a bit. I can do that by writing a <a href="http://automapper.codeplex.com/wikipage?title=Custom%20Value%20Resolvers">Custom Value Resolver</a>. It would for this code look like this:</p>
+<blockquote><p>public class SingleLineResolver : ValueResolver&lt;EntityOne, EntityTwoView&gt;<br />{<br />&nbsp;&nbsp;&nbsp; private int EntityTwoId { get; set; }<br />&nbsp;&nbsp;&nbsp; public SingleLineResolver(int entityTwoId)<br />&nbsp;&nbsp;&nbsp; {<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; this.EntityTwoId = entityTwoId;<br />&nbsp;&nbsp;&nbsp; }</p>
+<p>&nbsp;&nbsp;&nbsp; protected override EntityTwoView ResolveCore(EntityOne source)<br />&nbsp;&nbsp;&nbsp; {<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Mapper.CreateMap&lt;EntityTwo, EntityTwoView&gt;();<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var line = source.EntityTwos.First(e=&gt; e.EntityTwoID == this.EntityTwoId);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return Mapper.Map&lt;EntityTwoView&gt;(line);<br />&nbsp;&nbsp;&nbsp; }<br />}</p>
+</blockquote>
+<p>This code took me awhile to understand and be able to write… Now I might be stupid and you smart, so perhaps I’m the only one struggeling with this one… But to make use of it I had to update the previous code to:</p>
+<blockquote><p>EntityOne one = new EntityOne();<br />SingleLineResolver resolver = new SingleLineResolver(2);<br />Mapper.CreateMap&lt;EntityOne, EntityOneView&gt;()<br />&nbsp;&nbsp;&nbsp; .ForMember(dest =&gt; dest.EntityTwo, opt =&gt; opt.ResolveUsing(resolver));<br />EntityOneView oneView = Mapper.Map&lt;EntityOneView&gt;(one);</p>
+</blockquote>
+<p>Here I am basically saying that when you (AutoMapper) create the mapping between EntityOne and EntityOneView and come to the “EntityTwo” property (on the EntityOneView object) please use my custom value resolver (resolver) to figure out the value of that property. It will then send the “one” object into my custom value resolver class (SingleLineResolver) and the output will be set as the value of the property called “EntityTwo” on the new object of type “EntityOneView”; Puh! </p>
+<p>Basically AutoMapper let’s me use two objects (or more!) that are fairly similar and map between them. She (?) will handle complex scenarios like this and much, much more. I hereby dub the project “AutoMagic”. </p>
+<p><em>Please note that the code I present here has been severly altered from the actual production code, so please don’t shoot me if it fails to work as expected!</em></p>
+]]></content:encoded>
+			<wfw:commentRss>http://blog.noocyte.net/2011/10/13/automapper-aka-automagic/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+	</channel>
+</rss>

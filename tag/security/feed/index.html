@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Home of noocyte &#187; security</title>
+	<atom:link href="http://blog.noocyte.net/tag/security/feed/" rel="self" type="application/rss+xml" />
+	<link>http://blog.noocyte.net</link>
+	<description>Ramblings of a mad mind</description>
+	<lastBuildDate>Fri, 04 Apr 2014 13:39:58 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=4.2.2</generator>
+	<item>
+		<title>Howto use configurable rolenames to authorize attribute</title>
+		<link>http://blog.noocyte.net/2011/10/10/howto-use-configurable-rolenames-to-authorize-attribute/</link>
+		<comments>http://blog.noocyte.net/2011/10/10/howto-use-configurable-rolenames-to-authorize-attribute/#comments</comments>
+		<pubDate>Mon, 10 Oct 2011 11:40:00 +0000</pubDate>
+		<dc:creator><![CDATA[noocyte]]></dc:creator>
+				<category><![CDATA[Geek]]></category>
+		<category><![CDATA[mvc]]></category>
+		<category><![CDATA[security]]></category>
+
+		<guid isPermaLink="false">https://noocyte.wordpress.com/2011/10/10/howto-use-configurable-rolenames-to-authorize-attribute/</guid>
+		<description><![CDATA[For one of my ASP.Net MVC 3 projects I make heavy use of the “[Authorize(Roles=…)]” syntax, but the fact that I have to type in the rolename there always rubbed me the wrong way. I started to experiment to see if I could perhaps use some code to get the rolename from configuration or something. &#8230; <a href="http://blog.noocyte.net/2011/10/10/howto-use-configurable-rolenames-to-authorize-attribute/" class="more-link">Continue reading <span class="screen-reader-text">Howto use configurable rolenames to authorize attribute</span> <span class="meta-nav">&#8594;</span></a>]]></description>
+				<content:encoded><![CDATA[<p>For one of my ASP.Net MVC 3 projects I make heavy use of the “[Authorize(Roles=…)]” syntax, but the fact that I have to type in the rolename there always rubbed me the wrong way. I started to experiment to see if I could perhaps use some code to get the rolename from configuration or something. By default I could not, but it was possible to inherit from the Authorize attribute and create my own to make this possible. And so that’s what I did, here is the code:</p>
+<blockquote><p>public class SecureAttribute : AuthorizeAttribute<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp; public SecureAttribute() : this(true)<br />&nbsp;&nbsp;&nbsp;&nbsp; {<br />&nbsp;&nbsp;&nbsp;&nbsp; }</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp; public SecureAttribute(bool requireAdmin) : base()<br />&nbsp;&nbsp;&nbsp;&nbsp; {<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (requireAdmin)<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; this.Roles = Configuration.AdminRoleName;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br />&nbsp;&nbsp;&nbsp;&nbsp; }<br />}</p>
+</blockquote>
+<p>To use it:</p>
+<blockquote><p>[Secure]<br />public abstract class SecureController : Controller</p>
+</blockquote>
+<p>Basically all I do is add two constructors to enable me to set the “Roles” property to whatever I have configured it to be. Now, this code is tailor to my specific project, so you wanna change stuff to match your requirements. Please also note that I use a “SecureController” that all my Controllers inherit from if they require Admin access. I did this to save exactly one line of code on all of my controllers! So instead of inheriting from just “Controller” and adding the “Secure” attribute they just inherit from “SecureController”, which has the attribute and inherits from “Controller”. Perhaps a bit over the top, but you never know; one day I might add some more stuff here.</p>
+<p>If anyone can see anything wrong with this implementation, please let me know! I am fairly new to MVC and the ASP.Net Membership stuff… <img style="border-style:none;" class="wlEmoticon wlEmoticon-smile" alt="Smilefjes" src="http://noocyte.files.wordpress.com/2011/10/wlemoticon-smile.png"></p>
+]]></content:encoded>
+			<wfw:commentRss>http://blog.noocyte.net/2011/10/10/howto-use-configurable-rolenames-to-authorize-attribute/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>The Security Development Lifecycle : The First Step on the Road to More Secure Software is admitting you have a Problem</title>
+		<link>http://blog.noocyte.net/2008/02/22/the-security-development-lifecycle-the-first-step-on-the-road-to-more-secure-software-is-admitting-you-have-a-problem/</link>
+		<comments>http://blog.noocyte.net/2008/02/22/the-security-development-lifecycle-the-first-step-on-the-road-to-more-secure-software-is-admitting-you-have-a-problem/#comments</comments>
+		<pubDate>Fri, 22 Feb 2008 10:46:21 +0000</pubDate>
+		<dc:creator><![CDATA[noocyte]]></dc:creator>
+				<category><![CDATA[Link]]></category>
+		<category><![CDATA[microsoft]]></category>
+		<category><![CDATA[security]]></category>
+
+		<guid isPermaLink="false">http://noocyte.wordpress.com/2008/02/22/the-security-development-lifecycle-the-first-step-on-the-road-to-more-secure-software-is-admitting-you-have-a-problem/</guid>
+		<description><![CDATA[I totally agree! Microsoft is serious about security and others should take notice.&#160; The Security Development Lifecycle : The First Step on the Road to More Secure Software is admitting you have a Problem]]></description>
+				<content:encoded><![CDATA[<p>I totally agree! Microsoft is serious about security and others should take notice.&nbsp; </p>
+<p><a href="http://blogs.msdn.com/sdl/archive/2008/02/21/the-first-step-on-the-road-to-more-secure-software-is-admitting-you-have-a-problem.aspx">The Security Development Lifecycle : The First Step on the Road to More Secure Software is admitting you have a Problem</a></p>
+]]></content:encoded>
+			<wfw:commentRss>http://blog.noocyte.net/2008/02/22/the-security-development-lifecycle-the-first-step-on-the-road-to-more-secure-software-is-admitting-you-have-a-problem/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>SQL Server Version Database</title>
+		<link>http://blog.noocyte.net/2007/11/20/sql-server-version-database/</link>
+		<comments>http://blog.noocyte.net/2007/11/20/sql-server-version-database/#comments</comments>
+		<pubDate>Tue, 20 Nov 2007 08:05:02 +0000</pubDate>
+		<dc:creator><![CDATA[noocyte]]></dc:creator>
+				<category><![CDATA[Geek]]></category>
+		<category><![CDATA[Link]]></category>
+		<category><![CDATA[patch]]></category>
+		<category><![CDATA[security]]></category>
+		<category><![CDATA[sql server]]></category>
+
+		<guid isPermaLink="false">http://noocyte.wordpress.com/2007/11/20/sql-server-version-database/</guid>
+		<description><![CDATA[&#160;This is pretty handy! It basically lists all patches to Sql Server. Source: SQL Server Version Database]]></description>
+				<content:encoded><![CDATA[<p>&nbsp;This is pretty handy! It basically lists all patches to Sql Server. </p>
+<p>Source: <a href="http://www.sqlsecurity.com/FAQs/SQLServerVersionDatabase/tabid/63/Default.aspx">SQL Server Version Database</a></p>
+]]></content:encoded>
+			<wfw:commentRss>http://blog.noocyte.net/2007/11/20/sql-server-version-database/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Windows Communication Foundation (WCF)</title>
+		<link>http://blog.noocyte.net/2007/11/13/windows-communication-foundation-wcf/</link>
+		<comments>http://blog.noocyte.net/2007/11/13/windows-communication-foundation-wcf/#comments</comments>
+		<pubDate>Tue, 13 Nov 2007 11:19:34 +0000</pubDate>
+		<dc:creator><![CDATA[noocyte]]></dc:creator>
+				<category><![CDATA[Geek]]></category>
+		<category><![CDATA[Link]]></category>
+		<category><![CDATA[security]]></category>
+		<category><![CDATA[wcf]]></category>
+
+		<guid isPermaLink="false">http://noocyte.wordpress.com/2007/11/13/windows-communication-foundation-wcf/</guid>
+		<description><![CDATA[Another good source for WCF Security. Source: Windows Communication Foundation (WCF)]]></description>
+				<content:encoded><![CDATA[<p>Another good source for WCF Security.</p>
+<p>Source: <a href="http://wcf.netfx3.com/content/WindowsCommunicationFoundationWCFInteroperabilityandMigrationwithWSE20.aspx">Windows Communication Foundation (WCF)</a></p>
+]]></content:encoded>
+			<wfw:commentRss>http://blog.noocyte.net/2007/11/13/windows-communication-foundation-wcf/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Enterprise .NET Community: Securing your WCF Service</title>
+		<link>http://blog.noocyte.net/2007/11/13/enterprise-net-community-securing-your-wcf-service/</link>
+		<comments>http://blog.noocyte.net/2007/11/13/enterprise-net-community-securing-your-wcf-service/#comments</comments>
+		<pubDate>Tue, 13 Nov 2007 09:36:03 +0000</pubDate>
+		<dc:creator><![CDATA[noocyte]]></dc:creator>
+				<category><![CDATA[Geek]]></category>
+		<category><![CDATA[Link]]></category>
+		<category><![CDATA[security]]></category>
+		<category><![CDATA[wcf]]></category>
+
+		<guid isPermaLink="false">http://noocyte.wordpress.com/2007/11/13/enterprise-net-community-securing-your-wcf-service/</guid>
+		<description><![CDATA[Very, very good article on WCF Security.&#160; Link to Enterprise .NET Community: Securing your WCF Service]]></description>
+				<content:encoded><![CDATA[<p>Very, very good article on WCF Security.&nbsp;</p>
+<p><a href="http://www.theserverside.net/tt/articles/showarticle.tss?id=SecuringWCFService">Link to Enterprise .NET Community: Securing your WCF Service</a></p>
+]]></content:encoded>
+			<wfw:commentRss>http://blog.noocyte.net/2007/11/13/enterprise-net-community-securing-your-wcf-service/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Hackers@Microsoft: First Line of Defense for Web Applications – Part 2</title>
+		<link>http://blog.noocyte.net/2007/10/23/hackersmicrosoft-first-line-of-defense-for-web-applications-part-2/</link>
+		<comments>http://blog.noocyte.net/2007/10/23/hackersmicrosoft-first-line-of-defense-for-web-applications-part-2/#comments</comments>
+		<pubDate>Tue, 23 Oct 2007 12:19:53 +0000</pubDate>
+		<dc:creator><![CDATA[noocyte]]></dc:creator>
+				<category><![CDATA[Geek]]></category>
+		<category><![CDATA[Link]]></category>
+		<category><![CDATA[development]]></category>
+		<category><![CDATA[microsoft]]></category>
+		<category><![CDATA[security]]></category>
+
+		<guid isPermaLink="false">http://noocyte.wordpress.com/2007/10/23/hackersmicrosoft-first-line-of-defense-for-web-applications-part-2/</guid>
+		<description><![CDATA[&#160; Link to %41%43%45%20%54%65%61%6d : First Line of Defense for Web Applications – Part 2]]></description>
+				<content:encoded><![CDATA[<p>&nbsp;</p>
+<p><a href="http://blogs.msdn.com/hackers/archive/2007/10/22/first-line-of-defense-for-web-applications-part-2.aspx">Link to %41%43%45%20%54%65%61%6d : First Line of Defense for Web Applications – Part 2</a></p>
+]]></content:encoded>
+			<wfw:commentRss>http://blog.noocyte.net/2007/10/23/hackersmicrosoft-first-line-of-defense-for-web-applications-part-2/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+	</channel>
+</rss>
