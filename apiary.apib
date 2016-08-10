@@ -1,0 +1,154 @@
+FORMAT: 1A
+HOST: https://api.uxrisk.com/
+
+# UXRisk
+
+UXRisk is an open API that allows any tenant to create integrations with UXRisk.
+
+## Articles Collection [/article]
+
+### List All Articles [GET]
+
++ Response 200 (application/json)
+
+        {
+            "results": [
+                {
+                    "name": "assessment",
+                    "doccount": 11
+                },
+                {
+                    "name": "measure",
+                    "doccount": 2
+                },
+                {
+                    "name": "risk",
+                    "doccount": 101
+                }
+            ]
+        }
+
+## Article Type Collection [/article/{article_type}]
+
+### Get all articles of a given type [GET]
+
++ Response 200 (application/json)
+
+        {
+            "results": [
+            {
+            "a_risk_ids": {
+            "values": [
+            "568f54a4-4e5c-48a5-93bd-e1a58077c09d",
+            "e6f11688-dcb3-4cf5-9f8a-5e7d4b7682b9"
+            ],
+            "type": "risk"
+            },
+            "etag": "W/\"datetime'2016-08-08T08%3A17%3A55.8006499Z'\"",
+            "title": "The assessment",
+            "sys_sequence": 821098766779301,
+            "sys_createdbydate": "2016-08-08T08:17:45.8519594Z",
+            "parentid": "0",
+            "sys_deleted": false,
+            "e_status_ids": {
+            "values": [
+            "34aeeb1f-0028-4260-beef-13c6918255f9"
+            ],
+            "type": "assessmentstatus"
+            },
+            "sys_modifieddate": "2016-08-08T08:17:56.6779301Z",
+            "sys_createdby": "367cf219d398641a2ae505bd298a0fae2d707d855682bda510327da0def46023",
+            "id": "9fee74b2-885f-486d-a47e-860465471720",
+            "int_company": "rci66156",
+            "sys_template": "48eda88d-e1e5-45d4-a82b-565d4c5ba3de",
+            "sys_modifiedby": "367cf219d398641a2ae505bd298a0fae2d707d855682bda510327da0def46023",
+            "timestamp": "2016-08-08T10:17:55.8006499+02:00",
+            "tmp_score": 0.0
+            },
+            {
+            "a_risk_ids": {
+            "values": [
+            "2a39a146-d1b4-4455-bfa9-a85e73ce4e9e",
+            "03ff4561-caa0-44bc-9266-ca84e21edfc9"
+            ],
+            "type": "risk"
+            },
+            "etag": "W/\"datetime'2016-08-08T08%3A18%3A18.5826422Z'\"",
+            "title": "The assessment",
+            "isconfidential": true,
+            "sys_sequence": 821098993857209,
+            "sys_createdbydate": "2016-08-08T08:18:16.4669531Z",
+            "parentid": "0",
+            "sys_deleted": false,
+            "e_status_ids": {
+            "values": [
+            "34aeeb1f-0028-4260-beef-13c6918255f9"
+            ],
+            "type": "assessmentstatus"
+            },
+            "sys_modifieddate": "2016-08-08T08:18:19.3857209Z",
+            "sys_createdby": "367cf219d398641a2ae505bd298a0fae2d707d855682bda510327da0def46023",
+            "id": "39d4de9d-8269-41af-9cc5-c02d53080ede",
+            "int_company": "rci66156",
+            "sys_template": "48eda88d-e1e5-45d4-a82b-565d4c5ba3de",
+            "e_confidentialusers_ids": {
+            "values": [
+            "a5a147a7-db62-40b5-9c4d-7410af7a9b16",
+            "367cf219d398641a2ae505bd298a0fae2d707d855682bda510327da0def46023"
+            ],
+            "type": "user"
+            },
+            "sys_modifiedby": "367cf219d398641a2ae505bd298a0fae2d707d855682bda510327da0def46023",
+            "timestamp": "2016-08-08T10:18:18.5826422+02:00",
+            "tmp_score": 0.0
+            }
+            ]
+        }
+
+
+
+### Create a New Question [POST]
+
+You may create your own question using this action. It takes a JSON
+object containing a question and a collection of answers in the
+form of choices.
+
++ Request (application/json)
+
+        {
+            "question": "Favourite programming language?",
+            "choices": [
+                "Swift",
+                "Python",
+                "Objective-C",
+                "Ruby"
+            ]
+        }
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /questions/2
+
+    + Body
+
+            {
+                "question": "Favourite programming language?",
+                "published_at": "2015-08-05T08:40:51.620Z",
+                "choices": [
+                    {
+                        "choice": "Swift",
+                        "votes": 0
+                    }, {
+                        "choice": "Python",
+                        "votes": 0
+                    }, {
+                        "choice": "Objective-C",
+                        "votes": 0
+                    }, {
+                        "choice": "Ruby",
+                        "votes": 0
+                    }
+                ]
+            }
