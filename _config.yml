@@ -1,16 +1,16 @@
-title: "Something technical ?"
-email: anders.osthus@outlook.com
-author: Anders Østhus
-description: "My blog"
+title: "Ramblings of a mad mind"
+email: jarle.nygaard@outlook.com
+author: Jarle Nygård
+description: "Tze blog"
 baseurl: ""
-url: "https://andersosthus.github.io"
+url: "http://blog.noocyte.net/"
 date_format: "%b %-d, %Y"
 
 # Google services
 google_verification:
 # Use either direct GA implementation or set up GTM account
 # - using both will skew your data (leave blank to not use at all)
-google_analytics: UA-43389821-1
+google_analytics:
 google_tag_manager:
 # Bing services
 bing_verification:
@@ -32,7 +32,7 @@ fb_page_id:
 
 # Disqus post comments
 # (leave blank to disable Disqus)
-disqus_shortname: anders-osthus-blog
+disqus_shortname: noocyteblog
 
 # Facebook Comments plugin
 # (leave blank to disable Facebook Comments, otherwise set it to true)
@@ -41,14 +41,14 @@ facebook_appid:
 facebook_comments_number: 10
 
 # Social icons
-github_username: andersosthus
+github_username: noocyte
 bitbucket_username:
-stackoverflow_id: 2026649
-twitter_username: andersosthus
+stackoverflow_id: 11220
+twitter_username: noocyte
 skype_username:
 steam_nickname:
 google_plus_id:
-linkedin_username: aosthus
+linkedin_username: jarlenygaard
 angellist_username:
 medium_id:
 bitcoin_url:
